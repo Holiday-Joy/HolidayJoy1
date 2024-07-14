@@ -1,0 +1,65 @@
+const mongoose = require('mongoose');
+
+const propertySchema = new mongoose.Schema({
+    propertyID: { type: Number, required: true, unique: true, autoIncrement: true },
+    propertyType: { type: String, enum: ['Homestay', 'Hotel', 'Resort', 'Private Room', 'Dormitory', 'Tree house', 'Villa', 'Hut', 'Yacht', 'Apartment', 'Cottage', 'Tent'], required: true },
+    propertyName: { type: String, required: true },
+    propertyNickName: { type: String },
+    listEntireHome: { type: Boolean, required: true },
+    exactLocationName: { type: String, required: true },
+    popularNearbyLocationName: { type: String, required: true },
+    landMark: { type: String },
+    address: {
+        flatHouseNoFloorBuilding: { type: String, required: true },
+        streetLocalityColony: { type: String, required: true }
+    },
+    price: {
+        entireHouse: { type: Number, required: true },
+        perHead: { type: Number, required: true }
+    },
+    numberOfPeople: { type: Number, required: true },
+    numberOfBeds: { type: Number, required: true },
+    bedrooms: { type: Number, required: true },
+    bathrooms: { type: Number, required: true },
+    checkInTime: { type: String, enum: ['Flexible', '12:00 noon'], required: true },
+    checkOutTime: { type: String, enum: ['Flexible', '11:00 am'], required: true },
+    toiletries: { type: [String], default: ['Towels', 'Hand-wash', 'Soap', 'Shampoo'] },
+    amenities: {
+        kitchen: { type: Boolean },
+        tv: { type: Boolean },
+        satelliteTV: { type: Boolean },
+        wifi: { type: Boolean },
+        petsAllowed: { type: Boolean },
+        washingMachine: { type: Boolean },
+        dryer: { type: Boolean },
+        freeParking: { type: Boolean },
+        smokingAllowed: { type: Boolean },
+        indoorFireplace: { type: Boolean },
+        gym: { type: Boolean },
+        kidsPlayArea: { type: Boolean },
+        swimmingPool: { type: Boolean },
+        hotTub: { type: Boolean },
+        iron: { type: Boolean },
+        elevatorInBuilding: { type: Boolean },
+        airConditioning: { type: Boolean },
+        heating: { type: Boolean },
+        wheelchairAccessible: { type: Boolean },
+        jacuzzi: { type: Boolean }
+    },
+    houseRules: { type: String },
+    cancellationPolicy: { type: String },
+    description: { type: String },
+    openAllYearRound: {
+        status: { type: Boolean, required: true },
+        closureDates: { type: [Date] }
+    },
+    photos: [{
+        url: { type: String, required: true },
+        caption: { type: String }
+    }],
+    verified: { type: Boolean, default: false },
+    websiteURL: { type: String },
+    additionalPropertyLinks: { type: [String] }
+});
+
+module.exports = mongoose.model('Property', propertySchema);

@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.label1 {
+  @apply font-medium text-lg text-gray-700 flex flex-col tracking-wider;
+}
+.field1 {
+  @apply border border-gray-500 px-2 py-1 rounded-md;
+}
