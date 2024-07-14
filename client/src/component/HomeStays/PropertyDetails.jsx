@@ -89,9 +89,9 @@ const PropertyDetails = () => {
   return (
     <div className='w-full flex justify-center items-center'>
       <div className='w-[80%]'>
-        <div>
+        {/* <div>
           <Search />
-        </div>
+        </div> */}
         <section className='flex w-full h-auto justify-center items-center'>
           <div className="flex w-full flex-wrap md:flex-nowrap">
             {/* Main image */}
