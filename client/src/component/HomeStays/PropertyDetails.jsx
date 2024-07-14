@@ -28,7 +28,7 @@ const PropertyDetails = () => {
     // console.log(id);
     const fetchPropertie = async () => {
       try {
-        await axios.get(`https://holidayjoyvecation.onrender.com/property/${id}`).then(response => {
+        await axios.get(`https://holidayjoyvecation.onrender.com/api/v1/property/${id}`).then(response => {
           setProperty(response.data);
         })
       } catch (e) {

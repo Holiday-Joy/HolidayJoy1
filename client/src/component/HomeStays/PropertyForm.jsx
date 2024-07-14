@@ -132,7 +132,7 @@ const PropertyForm = () => {
 
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
-            const url = "https://holidayjoyvecation.onrender.com"
+            const url = "https://holidayjoyvecation.onrender.com/api/v1"
             await axios.post(url + '/list', values);
             alert('Property submitted successfully!');
             setSubmitting(false);

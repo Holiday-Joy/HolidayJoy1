@@ -17,7 +17,7 @@ const Properties = () => {
 
     useEffect(() => {
         const fetchProperties = async () => {
-            const link = `https://holidayjoyvecation.onrender.com/properties?keyword=${keyword}`;
+            const link = `https://holidayjoyvecation.onrender.com/api/v1/properties?keyword=${keyword}`;
             try {
                 await axios.get(link).then((response) => setProperties(response.data));
             } catch (e) {
