@@ -14,26 +14,10 @@ exports.propertyList = async (req, res) => {
 };
 
 exports.getAllPropertys = (async (req, res, next) => {
-
-    // const resultPerPage = 8;
-    // const productsCount = await Property.countDocuments();
-
     const apiFeature = new ApiFeatures(Property.find(), req.query)
         .search()
-    // .filter()
-
     let properties = await apiFeature.query;
-
-    // let filteredProductsCount = products.length
-
-    // apiFeature.pagination(resultPerPage);
-
-    // products = await apiFeature.query;
-
     res.status(200).json(properties);
-    // productsCount,
-    // resultPerPage,
-    // filteredProductsCount
 })
 
 

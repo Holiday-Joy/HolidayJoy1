@@ -17,10 +17,9 @@ const Properties = () => {
 
     useEffect(() => {
         const fetchProperties = async () => {
-            const link = `http://localhost:3000/api/v1/properties?keyword=${keyword}`;
+            const link = `https://holidayjoyvecation.onrender.com/properties?keyword=${keyword}`;
             try {
-                const response = await axios.get(link);
-                setProperties(response.data);
+                await axios.get(link).then((response) => setProperties(response.data));
             } catch (e) {
                 setError(e.message);
             }
@@ -33,7 +32,9 @@ const Properties = () => {
     return (
         <div className='w-full flex justify-center items-center'>
             <div className='w-[80%] flex flex-col'>
-                <Search />
+                <div className='w-[25rem] justify-center items-center'>
+                    <Search />
+                </div>
                 <h1 className='py-6'>Curated HomeStays in Shakleshpura</h1>
                 <div className='w-full flex flex-col justify-between items-start gap-6'>
                     {properties.map((property) => (

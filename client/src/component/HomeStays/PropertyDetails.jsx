@@ -9,6 +9,7 @@ import { MdDashboard } from "react-icons/md";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Search from "../HomeStays/Search";
+import Recommend from '../Recommend';
 const PropertyDetails = () => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -24,10 +25,10 @@ const PropertyDetails = () => {
   const [property, setProperty] = useState();
   const { id } = useParams();
   useEffect(() => {
-    console.log(id);
+    // console.log(id);
     const fetchPropertie = async () => {
       try {
-        await axios.get(`http://localhost:3000/api/v1/property/${id}`).then(response => {
+        await axios.get(`https://holidayjoyvecation.onrender.com/property/${id}`).then(response => {
           setProperty(response.data);
         })
       } catch (e) {
@@ -39,7 +40,7 @@ const PropertyDetails = () => {
   if (!property) {
     return <div>Loading...</div>;
   }
-  console.log(property);
+  // console.log(property);
   const { address,
     price,
     amenities,
@@ -307,6 +308,7 @@ const PropertyDetails = () => {
           {/* </div> */}
 
         </section>
+        <Recommend />
       </div >
     </div >
   )

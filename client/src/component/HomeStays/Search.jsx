@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { Label, TextInput } from "flowbite-react";
+import { HiMail } from "react-icons/hi";
 const Search = () => {
     const navigate = useNavigate();
     const [searchInput, setSearchInput] = useState("");
@@ -10,21 +14,25 @@ const Search = () => {
         }
     };
     return (
-        <div>
-            <form
-                onSubmit={handleSearch}
-                className='mb-6 flex gap-2'>
-                <input
-                    type='text'
-                    value={searchInput}
-                    onChange={(e) => setSearchInput(e.target.value)}
-                    placeholder='Search properties'
-                    className='p-2 border rounded'
-                />
-                <button type='submit' className='p-2 bg-blue-500 text-white rounded'>
-                    Search
-                </button>
-            </form>
+        <div className=' min-w-[25rem] bg-gray-100 rounded-3xl '>
+            <div className='w-full rounded-xl'>
+                <form
+                    onSubmit={handleSearch}
+                    className='mb-6 flex'>
+                    <input
+                        className='py-4 pl-6 w-full rounded-3xl bg-gray-100 border-none outline-none'
+                        type='text'
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
+                        placeholder='Search'
+
+                    />
+                    <button type='submit' className='py-4 px-5 text-black rounded-full'>
+                        <FontAwesomeIcon icon={faSearch} />
+                    </button>
+
+                </form>
+            </div>
         </div>
     )
 }
