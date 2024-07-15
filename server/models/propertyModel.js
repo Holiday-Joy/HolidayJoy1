@@ -6,6 +6,17 @@ const propertySchema = new mongoose.Schema({
     listEntireHome: { type: Boolean, required: true },
     exactLocationName: { type: String, required: true },
     popularNearbyLocationName: { type: String, required: true },
+    nearbyAttractions: [{
+        name: {
+            type: String,
+            required: true
+        },
+        distance: {
+            type: Number,
+            required: true,
+            min: [0, 'Distance must be positive']
+        }
+    }],
     address: {
         country: { type: String, required: true },
         city: { type: String, required: true },

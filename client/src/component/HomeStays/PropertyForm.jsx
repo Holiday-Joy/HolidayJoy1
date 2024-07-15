@@ -141,21 +141,7 @@ const PropertyForm = () => {
             alert('Error submitting property. Please try again.');
             setSubmitting(false);
         }
-        // try {
-        //     const response = await fetch('http://localhost:3000/api/v1/list', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(values)
-        //     });
-        //     setSubmitting(false);
-        //     const data = await response.json();
-        //     console.log('Data submitted successfully:', data);
-        // } catch (error) {
-        //     console.error('Error submitting data:', error);
-        //     setSubmitting(false);
-        // }
+
     };
 
 
