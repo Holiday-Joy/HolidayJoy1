@@ -10,18 +10,9 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Search from "../HomeStays/Search";
 import Recommend from '../Recommend';
+import RequestBookForm from './RequestBookForm';
 const PropertyDetails = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phoneCode: "+91",
-    phone: "",
-    checkIn: "",
-    checkOut: "",
-    adultsCount: "",
-    kidsCount: "",
-    message: "",
-  });
+
   const [property, setProperty] = useState();
   const { id } = useParams();
   useEffect(() => {
@@ -62,32 +53,9 @@ const PropertyDetails = () => {
 
   const amenitiesArray = Object.keys(amenities).filter(key => amenities[key]);
 
-  const perGuestAmount = 2499;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(
-      `Per Guest Amount: ₹${perGuestAmount}\n` +
-      `Full Name: ${formData.fullName}\n` +
-      `Email: ${formData.email}\n` +
-      `Phone: ${formData.phoneCode} ${formData.phone}\n` +
-      `Check-In: ${formData.checkIn}\n` +
-      `Check-Out: ${formData.checkOut}\n` +
-      `Adults Count: ${formData.adultsCount}\n` +
-      `Kids Count: ${formData.kidsCount}\n` +
-      `Message: ${formData.message}`
-    );
-  };
   return (
-    <div className='w-full flex justify-center items-center'>
+    <div className='w-full flex justify-center items-center mt-24'>
       <div className='w-[80%]'>
         {/* <div>
           <Search />
@@ -120,8 +88,8 @@ const PropertyDetails = () => {
             </div>
           </div>
         </section>
-        <section className='lg:m-2 flex justify-center items-center '>
-          <article className='lg:m-2 p-2 w-[60%] '>
+        <section className='lg:m-2 flex flex-col md:flex-row justify-center items-center '>
+          <article className='lg:m-2 p-2 w-full md:w-[60%] '>
             <div className='flex justify-between items-start'>
               <div>
                 <h1 className='text-4xl'>{propertyName}</h1>
@@ -139,9 +107,9 @@ const PropertyDetails = () => {
                 <h1 className='text-2xl py-4'>Meet Your Host </h1>
               </div>
               <div className='flex flex-wrap gap-8'>
-                <div className=' w-96 h-52 flex justify-center items-center border-[2px] gap-5 rounded-xl shadow-xl'>
+                <div className=' w-auto h-auto px-6 py-4 flex flex-col md:flex-row justify-center items-center border-[2px] gap-5 rounded-xl shadow-xl'>
                   <div>
-                    <Avatar img="" size="xl" />
+                    <Avatar img="" size="lg" />
                   </div>
                   <div className='flex-col'>
                     <h1 className='border-b-2 py-2 text-2xl font-medium'>Vinay Kumar</h1>
@@ -206,109 +174,11 @@ const PropertyDetails = () => {
               </Tabs>
             </section>
           </article>
-          {/* left side form */}
-          {/* <div className=''> */}
-          <div className="max-w-lg mx-auto p-4 lg:w-2/5 rounded-lg shadow-lg bg-white">
-            <div className="mb-4">
-
-              <div className="text-lg font-bold mt-2">The Greenstay Homestay</div>
-              <div className="text-green-600 text-xl">
-                Per Guest ₹{price.perHead} <span className="line-through text-gray-500">₹2,999</span>{" "}
-                <span className="text-green-500">save 17%</span>
-              </div>
-              <div className="text-gray-500">Price includes 3 meals + Hi-Tea</div>
-            </div>
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="fullName"
-                placeholder="Full name *"
-                value={formData.fullName}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-              />
-              <div className="flex space-x-2">
-                <select
-                  name="phoneCode"
-                  value={formData.phoneCode}
-                  onChange={handleChange}
-                  className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                >
-                  <option value="+91">+91</option>
-                  {/* Add other country codes as needed */}
-                </select>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone *"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                />
-              </div>
-              <div className="flex space-x-2">
-                <input
-                  type="text"
-                  name="checkIn"
-                  placeholder="Check-In"
-                  value={formData.checkIn}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                />
-                <input
-                  type="text"
-                  name="checkOut"
-                  placeholder="Check-Out"
-                  value={formData.checkOut}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                />
-              </div>
-              <div className="flex space-x-2">
-                <input
-                  type="number"
-                  name="adultsCount"
-                  placeholder="Adults Count"
-                  value={formData.adultsCount}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                />
-                <input
-                  type="number"
-                  name="kidsCount"
-                  placeholder="Kids Count (5-12Yrs)"
-                  value={formData.kidsCount}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                />
-              </div>
-              <textarea
-                name="message"
-                placeholder="Message"
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-              ></textarea>
-              <button
-                type="submit"
-                className="w-full bg-yellow-400 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-600"
-              >
-                Request to Book
-              </button>
-            </form>
+          {/* right side form */}
+          <div>
+            <RequestBookForm price={price} />
           </div>
-          {/* </div> */}
-
         </section>
-        <Recommend />
       </div >
     </div >
   )

@@ -143,20 +143,18 @@ const PropertyForm = () => {
         }
 
     };
-
-
     return (
-        <div>
+        <div className='mt-24 w-full flex justify-center items-center'>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
                 {({ isSubmitting }) => (
-                    <Form className='w-full flex justify-center items-center'>
-                        <section className='w-[80%] flex  justify-around items-center '>
+                    <Form className='w-[80%] flex justify-center items-center md:w-full'>
+                        <section className='w-full max-w-4xl flex flex-wrap justify-around items-start gap-6'>
                             {/* Property Type */}
-                            <div className='w-[30%] flex flex-col justify-center items-center'>
+                            <div className='w-full sm:w-[45%] md:w-[50%] flex flex-col'>
                                 <div className='label1 w-full'>
                                     <label htmlFor="propertyType">Property Type</label>
                                     <Field as="select" name="propertyType" id="propertyType" className="field1">
@@ -164,7 +162,7 @@ const PropertyForm = () => {
                                         {['Homestay', 'Hotel', 'Resort', 'Private Room', 'Dormitory', 'Tree house', 'Villa', 'Hut', 'Yacht', 'Apartment', 'Cottage', 'Tent'].map(type => (
                                             <option key={type} value={type}>{type}</option>
                                         ))}
-                                    </Field >
+                                    </Field>
                                     <ErrorMessage name="propertyType" component="div" className="error text-red-400" />
                                 </div>
 
@@ -205,7 +203,7 @@ const PropertyForm = () => {
                                     <ErrorMessage name="popularNearbyLocationName" component="div" className="error text-red-400" />
                                 </div>
 
-                                {/* Address Field s */}
+                                {/* Address Fields */}
                                 <div className='label1 w-full'>
                                     <label htmlFor="address.country">Country</label>
                                     <Field type="text" id="address.country" name="address.country" className="field1" />
@@ -227,7 +225,7 @@ const PropertyForm = () => {
                                     <ErrorMessage name="address.pincode" component="div" className="error text-red-400" />
                                 </div>
 
-                                {/* Price Field s */}
+                                {/* Price Fields */}
                                 <div className='label1 w-full'>
                                     <label htmlFor="price.entireHouse">Entire House Price</label>
                                     <Field type="number" id="price.entireHouse" name="price.entireHouse" className="field1" />
@@ -246,16 +244,15 @@ const PropertyForm = () => {
                                     <ErrorMessage name="numberOfPeople" component="div" className="error text-red-400" />
                                 </div>
 
-
                                 {/* Number of Beds */}
                                 <div className='label1 w-full'>
                                     <label htmlFor="numberOfBeds">Number of Beds</label>
                                     <Field type="number" id="numberOfBeds" name="numberOfBeds" className="field1" />
                                     <ErrorMessage name="numberOfBeds" component="div" className="error text-red-400" />
                                 </div>
-
                             </div>
-                            <div className='w-[30%] flex flex-col justify-center items-center'>
+
+                            <div className='w-full sm:w-[45%] md:w-[40%] flex flex-col'>
                                 {/* Bedrooms */}
                                 <div className='label1 w-full'>
                                     <label htmlFor="bedrooms">Number of Bedrooms</label>
@@ -296,7 +293,7 @@ const PropertyForm = () => {
                                     {/* Add more toiletries as needed */}
                                 </div>
 
-                                {/* Amenities Field s */}
+                                {/* Amenities Fields */}
                                 <div className='label1 w-full'>
                                     <label>Amenities</label>
                                     <div>
@@ -311,7 +308,7 @@ const PropertyForm = () => {
                                             TV
                                         </label>
                                     </div>
-                                    {/* Add more amenities field s as needed */}
+                                    {/* Add more amenities fields as needed */}
                                 </div>
 
                                 {/* House Rules */}
@@ -355,7 +352,7 @@ const PropertyForm = () => {
                                         <Field type="text" name="photos[0].caption" placeholder="Photo Caption" className="field1" />
                                         <ErrorMessage name="photos[0].caption" component="div" className="error text-red-400" />
                                     </div>
-                                    {/* Add more photo field s as needed */}
+                                    {/* Add more photo fields as needed */}
                                 </div>
 
                                 {/* Verified */}
@@ -373,17 +370,8 @@ const PropertyForm = () => {
                                     <ErrorMessage name="websiteURL" component="div" className="error text-red-400" />
                                 </div>
 
-                                {/* Additional Property Links */}
-                                {/* <div>
-                                  <label htmlFor='additionalPropertyLinks[0]'>Additional Property Links</label>
-                                 <div>
-                                <Field  type="text" name="additionalPropertyLinks[0]" placeholder="Property Link" />
-                                </div>
-                            
-                               </div> */}
-
                                 {/* Submit Button */}
-                                <div className='w-full' >
+                                <div className='w-full'>
                                     <button type="submit" disabled={isSubmitting} className='bg-blue-600 w-full my-2 rounded-2xl py-3 items-center'>
                                         Submit
                                     </button>
@@ -393,6 +381,7 @@ const PropertyForm = () => {
                     </Form>
                 )}
             </Formik>
+
         </div>
     );
 };

@@ -9,11 +9,11 @@ const FeaturedStay = () => {
     return (
         <div className='w-full flex flex-col justify-center items-center'>
             <div className='w-full md:w-[80%]'>
-                <h1 className='pt-6 pb-4 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-wider text-center'>Featured Stays</h1>
+                <h1 className='pt-6 pb-4 text-3xl md:text-4xl font-semibold tracking-wider text-center'>Featured Stay</h1>
             </div>
             <section className='w-full md:w-[80%] flex flex-col md:flex-row justify-start items-center py-10'>
-                <Tabs aria-label="Default tabs" variant="default" className='w-full'>
-                    <Tabs.Item active title="All" className=''>
+                <Tabs aria-label="Default tabs" variant="default" className='w-auto'>
+                    <Tabs.Item active title="All" className='flex justify-start'>
                         <div className='w-full flex flex-wrap gap-4 md:gap-7 justify-center'>
                             {[...Array(4)].map((_, index) => (
                                 <Link to={'/properties'} key={index}>
@@ -23,21 +23,21 @@ const FeaturedStay = () => {
                         </div>
                     </Tabs.Item>
                     <Tabs.Item title="Shakleshpura">
-                        <div className='w-full flex flex-wrap gap-4 md:gap-7 justify-center'>
-                            {[...Array(4)].map((_, index) => (
+                        <div className='w-full  flex-wrap gap-4 md:gap-7 flex justify-start'>
+                            {[...Array(3)].map((_, index) => (
                                 <PackageCard key={index} />
                             ))}
                         </div>
                     </Tabs.Item>
                     <Tabs.Item title="Chikmagaluru">
-                        <div className='w-full flex flex-wrap gap-4 md:gap-7 justify-center'>
-                            {[...Array(4)].map((_, index) => (
+                        <div className='w-full flex flex-wrap gap-4 md:gap-7 justify-start'>
+                            {[...Array(3)].map((_, index) => (
                                 <PackageCard key={index} />
                             ))}
                         </div>
                     </Tabs.Item>
                     <Tabs.Item title="Coorg">
-                        <div className='w-full flex flex-wrap gap-4 md:gap-7 justify-center'>
+                        <div className='w-full flex flex-wrap gap-4 md:gap-7 justify-start'>
                             {[...Array(2)].map((_, index) => (
                                 <PackageCard key={index} />
                             ))}
