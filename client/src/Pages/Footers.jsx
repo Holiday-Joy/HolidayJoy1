@@ -8,8 +8,8 @@ const Footers = () => {
             <Footer container>
                 <div className="w-full">
                     <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1 md:gap-10">
-                        <div className='w-96 py-6'>
-                            <img src={logo} alt="" />
+                        <div className='w-80 py-6'>
+                            <img src={logo} alt="logo" />
                         </div>
                         <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
                             <div>

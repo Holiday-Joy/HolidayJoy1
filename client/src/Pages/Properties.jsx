@@ -30,13 +30,13 @@ const Properties = () => {
     if (error) return <p>Error loading properties: {error}</p>;
 
     return (
-        <div className='w-full flex justify-center items-center'>
+        <div className='w-full flex justify-center items-center mt-24'>
             <div className='w-[80%] flex flex-col'>
-                <div className='w-[25rem] justify-center items-center'>
+                <div className='flex  justify-center items-center'>
                     <Search />
                 </div>
-                <h1 className='py-6'>Curated HomeStays in Shakleshpura</h1>
-                <div className='w-full flex flex-col justify-between items-start gap-6'>
+                <h1 className='py-6 text-4xl font-normal'>Curated HomeStays {keyword}</h1>
+                <div className='w-full flex flex-col justify-between items-start gap-6 md:p-6 border-2 rounded-lg'>
                     {properties.map((property) => (
                         // this component is to show case show case HomeStays in Packs
                         <PackagePack key={property._id} property={property} />

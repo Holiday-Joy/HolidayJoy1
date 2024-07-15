@@ -10,23 +10,23 @@ import { Link } from 'react-router-dom'
 import Search from '../component/HomeStays/Search';
 const Home = () => {
     return (
-        <div>
-            <div className="relative pb-20 h-96 sm:h-96 xl:h-96 2xl:h-96">
-                <Carousel className='lg:h-[30rem]'>
-                    <img src={logo} alt="slider" />
-                    <img src={logo} alt="slider" />
-                    <img src={logo} alt="slider" />
-                    <img src={logo} alt="slider" />
+        <div className=''>
+            <div className="relative w-full  pb-20 h-[80vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-[90vh] 2xl:h-[100vh]">
+                <Carousel className="h-full">
+                    <img src={logo} alt="slider" className="object-cover w-full h-full" />
+                    <img src={logo} alt="slider" className="object-cover w-full h-full" />
+                    <img src={logo} alt="slider" className="object-cover w-full h-full" />
+                    <img src={logo} alt="slider" className="object-cover w-full h-full" />
                 </Carousel>
-                <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/8">
+                <div className="absolute top-[40%] sm:top-[25%] md:top-[40%] lg:top-[40%] xl:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/4">
                     <Search />
                 </div>
             </div>
             <Categories />
             <FeaturedStay />
-            <TimeLine />
+
             <section className='w-full flex justify-center items-center flex-col'>
-                <div className='w-[80%] flex flex-col justify-center items-center'>
+                <div className='w-[80%] flex flex-col justify-center items-center overflow-hidden'>
                     <div className='justify-center items-center py-10'>
                         <section className='w-full flex-col justify-center items-center'>
                             <h1 className='text-4xl'>List your property here!</h1>
@@ -45,7 +45,7 @@ const Home = () => {
                             </button>
                         </Link>
                         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 rounded-full overflow-hidden">
-                            <img src={shakleshpura} className="w-[8rem] h-[8rem]" />
+                            <img src={shakleshpura} className="w-[8rem] h-[8rem]  " />
                         </div>
                         <div className="absolute top-0 left-1/2 transform -translate-x-[-70%] -translate-y-[-55%]  rounded-full overflow-hidden ">
                             <img src={shakleshpura} className="w-[8rem] h-[8rem]" />
@@ -65,8 +65,10 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <Faq />
-        </div>
+
+            <TimeLine />
+            {/* <Faq /> */}
+        </div >
     )
 }
 

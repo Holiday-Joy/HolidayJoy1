@@ -9,8 +9,9 @@ import PropertyDetails from './component/HomeStays/PropertyDetails';
 const App = () => {
 
   return (
-    <div>
+    <div >
       <NavBar />
+
       <Routes>
         <Route path='/' element={<Home />}></Route>
         {/* Listing form */}

@@ -39,18 +39,18 @@ const Categories = () => {
     ]
     return (
         <div className='w-full flex justify-center items-center'>
-            <div className='w-[80%] '>
-                <h1 className='pt-6 pb-4 text-[3rem] font-semibold tracking-wider'>Popular Locations</h1>
+            <div className='w-full max-w-screen-xl p-4'>
+                <h1 className='pt-6 pb-4 text-3xl md:text-4xl font-semibold tracking-wider text-center'>Popular Locations</h1>
                 <section className='flex flex-wrap py-10 gap-5 justify-center items-center'>
                     {list.map((item, index) => (
-                        <Link to={'/properties'}>
-                            <div key={index} className='flex justify-center items-center bg-gray-200 py-2 px-1 rounded-full w-full sm:w-full md:w-auto lg:w-auto  '>
-                                <img src={item.img} alt="shakleshpura" width={90} className='rounded-full px-4' />
-                                <span className='flex-col justify-center items-center'>
-                                    <p>{item.name}</p>
-                                    <p className='text-sm text-gray-700'>{item.des}</p>
+                        <Link to={'/properties'} key={index}>
+                            <div className='flex w-auto  flex-row justify-between items-center bg-gray-200 py-2 px-2 rounded-full sm:w-auto md:w-auto lg:w-auto'>
+                                <img src={item.img} alt={item.name} width={90} className='rounded-full px-4  sm:mb-0' />
+                                <span className='flex flex-col justify-center  items-start'>
+                                    <p className=' text-lg font-medium'>{item.name}</p>
+                                    <p className=' text-sm text-gray-700'>{item.des}</p>
                                 </span>
-                                <FontAwesomeIcon icon={faArrowRight} className='text-2xl cursor-pointer transform ease-in-out hover:-translate-y-1 bg-orange-400 py-3 px-4 ml-8 rounded-full' />
+                                <FontAwesomeIcon icon={faArrowRight} className='text-xl sm:text-2xl cursor-pointer transform ease-in-out hover:-translate-y-1 bg-orange-400 py-3 px-4 ml-0 sm:ml-8 rounded-full sm:mt-0' />
                             </div>
                         </Link>
                     ))}
