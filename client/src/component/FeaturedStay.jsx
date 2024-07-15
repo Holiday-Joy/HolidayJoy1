@@ -14,16 +14,16 @@ const FeaturedStay = () => {
                 <Tabs aria-label="Default tabs" variant="default" className=''>
                     <Tabs.Item active title="All" className=''>
                         <div className='w-full flex flex-wrap gap-7 justify-center'>
-                            <Link to={'/property'}>
+                            <Link to={'/properties'}>
                                 <PackageCard />
                             </Link>
-                            <Link to={'/property'}>
+                            <Link to={'/properties'}>
                                 <PackageCard />
                             </Link>
-                            <Link to={'/property'}>
+                            <Link to={'/properties'}>
                                 <PackageCard />
                             </Link>
-                            <Link to={'/property'}>
+                            <Link to={'/properties'}>
                                 <PackageCard />
                             </Link>
                         </div>
