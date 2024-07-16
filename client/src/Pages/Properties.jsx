@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import PackagePack from '../component/HomeStays/PackagePack';
 import Search from '../component/HomeStays/Search';
+import { Spinner } from "flowbite-react";
 
 // Custom hook to get query parameters
 const useQuery = () => {
@@ -26,6 +27,10 @@ const Properties = () => {
         };
         fetchProperties();
     }, [keyword]);
+
+    if (properties.length === 0) return <div className='w-full h-[100vh] flex justify-center items-center'>
+        <Spinner aria-label="Extra large spinner example" size="xl" />
+    </div>
 
     if (error) return <p>Error loading properties: {error}</p>;
 

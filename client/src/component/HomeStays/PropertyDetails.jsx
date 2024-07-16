@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import Search from "../HomeStays/Search";
 import Recommend from '../Recommend';
 import RequestBookForm from './RequestBookForm';
+import { Spinner } from "flowbite-react";
 const PropertyDetails = () => {
 
   const [property, setProperty] = useState();
@@ -28,9 +29,11 @@ const PropertyDetails = () => {
     };
     fetchPropertie();
   }, []);
-  if (!property) {
-    return <div>Loading...</div>;
-  }
+
+  if (!property) return <div className='w-full h-[100vh] flex justify-center items-center'>
+    <Spinner aria-label="Extra large spinner example" size="xl" />
+  </div>
+
   // console.log(property);
   const { address,
     price,

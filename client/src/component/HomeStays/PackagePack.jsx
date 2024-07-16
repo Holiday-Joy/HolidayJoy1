@@ -12,7 +12,7 @@ const PackagePack = ({ property }) => {
     const handleClick = () => {
         navigate(`/property/${property._id}`);
     };
-
+    
     return (
         <div className='flex flex-col md:flex-row gap-6 w-full border-2 p-4 shadow-lg rounded-lg'>
             <section className='w-full h-60 md:w-1/2 md:h-auto'>
