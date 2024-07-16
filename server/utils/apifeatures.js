@@ -7,12 +7,13 @@ class ApiFeatures {
     search() {
         const keyword = this.queryStr.keyword
             ? {
-                propertyName: {
+                exactLocationName: {
                     $regex: this.queryStr.keyword,
                     $options: "i",
                 },
             }
             : {};
+        console.log(keyword);
         this.query = this.query.find({ ...keyword });
         return this;
     }
