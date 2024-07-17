@@ -6,6 +6,8 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 const FeaturedStay = () => {
+    // https://holidayjoyvecation.onrender.com/api/v1/properties?keyword=banglore&limit=4
+
     return (
         <div className='w-full flex flex-col justify-center items-center'>
             <div className='w-full md:w-[80%]'>

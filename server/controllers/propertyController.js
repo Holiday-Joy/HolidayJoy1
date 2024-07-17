@@ -15,7 +15,7 @@ exports.propertyList = async (req, res) => {
 
 exports.getAllPropertys = (async (req, res, next) => {
     const apiFeature = new ApiFeatures(Property.find(), req.query)
-        .search()
+        .search().limit();
     let properties = await apiFeature.query;
     res.status(200).json(properties);
 })
