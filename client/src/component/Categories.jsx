@@ -40,11 +40,11 @@ const Categories = () => {
         },
     ]
     const handleCategory = (value) => {
-        setSearchInput(value.name);
-        console.log(searchInput);
-        if (searchInput.trim()) {
-            navigate(`/properties?keyword=${searchInput}`);
-        }
+        // setSearchInput(value.name);
+        // console.log(searchInput);
+        // if (searchInput.trim()) {
+        navigate(`/properties?keyword=${value.name}`);
+        // }
     }
     return (
         <div className='w-full flex justify-center items-center'>
