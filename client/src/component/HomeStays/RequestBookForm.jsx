@@ -1,8 +1,8 @@
 import { useState } from "react";
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 
 const RequestBookForm = ({ price }) => {
-
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -14,20 +14,38 @@ const RequestBookForm = ({ price }) => {
         kidsCount: "",
         message: "",
     });
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert(
-            `Per Guest Amount: ₹${perGuestAmount}\n` +
-            `Full Name: ${formData.fullName}\n` +
-            `Email: ${formData.email}\n` +
-            `Phone: ${formData.phoneCode} ${formData.phone}\n` +
-            `Check-In: ${formData.checkIn}\n` +
-            `Check-Out: ${formData.checkOut}\n` +
-            `Adults Count: ${formData.adultsCount}\n` +
-            `Kids Count: ${formData.kidsCount}\n` +
-            `Message: ${formData.message}`
-        );
+
+        const bookingData = {
+            name: formData.fullName,
+            email: formData.email,
+            number: `${formData.phoneCode} ${formData.phone}`,
+            checkInDate: formData.checkIn,
+            checkOutDate: formData.checkOut,
+            adultsCount: formData.adultsCount,
+            kidsCount: formData.kidsCount,
+            message: formData.message,
+            price: price.perHead || 5000,
+        };
+        console.log(bookingData);
+        try {
+            const response = await axios.post('https://holidayjoyvecation.onrender.com/api/v1/book', bookingData);
+
+            console.log(response);
+            if (response.status === 200) {
+                alert('Booking request saved and email sent to host.');
+            } else {
+                alert(`An error occurred: ${response.statusText}`);
+                console.error('Error:', response);
+            }
+        } catch (error) {
+            alert(`An error occurred: ${error.message}`);
+            console.error('Error:', error);
+        }
     };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -35,8 +53,9 @@ const RequestBookForm = ({ price }) => {
             [name]: value,
         }));
     };
+
     return (
-        <div className="w-full mx-auto p-4  rounded-lg shadow-lg bg-white">
+        <div className="w-full mx-auto p-4 rounded-lg shadow-lg bg-white">
             <div className="mb-4">
                 <div className="text-lg font-bold mt-2">The Greenstay Homestay</div>
                 <div className="text-green-600 text-xl">
@@ -81,23 +100,29 @@ const RequestBookForm = ({ price }) => {
                         className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
                     />
                 </div>
-                <div className="flex space-x-2">
-                    <input
-                        type="text"
-                        name="checkIn"
-                        placeholder="Check-In"
-                        value={formData.checkIn}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                    />
-                    <input
-                        type="text"
-                        name="checkOut"
-                        placeholder="Check-Out"
-                        value={formData.checkOut}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                    />
+                <div className="flex space-x-2 justify-between">
+                    <div className="flex flex-col justify-start items-start">
+                        <label name="checkIn" className="ml-1 text-gray-400">CheckIn </label>
+                        <input
+                            type="date"
+                            name="checkIn"
+                            placeholder="Check-In"
+                            value={formData.checkIn}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                        />
+                    </div>
+                    <div className="flex flex-col justify-start items-start">
+                        <label name="checkOut" className="ml-1 text-gray-400">CheckOut </label>
+                        <input
+                            type="date"
+                            name="checkOut"
+                            placeholder="Check-Out"
+                            value={formData.checkOut}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+                        />
+                    </div>
                 </div>
                 <div className="flex space-x-2">
                     <input
@@ -132,7 +157,7 @@ const RequestBookForm = ({ price }) => {
                 </button>
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default RequestBookForm
+export default RequestBookForm;

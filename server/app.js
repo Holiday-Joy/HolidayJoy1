@@ -16,7 +16,7 @@ connectDB();
 // Route import 
 const authRoutes = require('./routes/authRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
-
+const bookingRoutes = require('./controllers/bookingRequest');
 
 
 app.get('/', (req, res) => {
@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/v1', authRoutes); ///register
 app.use('/api/v1', propertyRoutes); //(http://localhost:5000/api/v1/list)
+app.use('/api/v1', bookingRoutes);
 
 // Start the Server
 const PORT = process.env.PORT || 3000;
