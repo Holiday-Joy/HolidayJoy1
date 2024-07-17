@@ -35,7 +35,7 @@ const RequestBookForm = ({ price }) => {
 
             console.log(response);
             if (response.status === 200) {
-                alert('Booking request saved and email sent to host.');
+                alert('Successfully Email sent, Host will contact you.');
             } else {
                 alert(`An error occurred: ${response.statusText}`);
                 console.error('Error:', response);
