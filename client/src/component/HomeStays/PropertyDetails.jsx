@@ -135,9 +135,6 @@ const PropertyDetails = () => {
             </section>
             <section>
               <Tabs aria-label="Default tabs" variant="default">
-                <Tabs.Item active title="Rooms">
-                  {/* add rooms here */}
-                </Tabs.Item>
                 <Tabs.Item title="Amenities">
                   <div className='py-3 flex gap-3 lg:text-md flex-wrap '>
                     {/* map this */}
