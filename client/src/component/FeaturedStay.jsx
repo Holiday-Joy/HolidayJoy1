@@ -61,7 +61,7 @@ const FeaturedStay = () => {
                             Chikkamagaluru
                         </button>
                     </div>
-                    <div className='flex gap-4'>
+                    <div className='flex gap-4 flex-wrap'>
                         {error && <p className="text-red-500">Error: {error}</p>}
                         {
                             properties.map((property) => (
