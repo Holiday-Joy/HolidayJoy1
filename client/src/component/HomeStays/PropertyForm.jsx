@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 
@@ -150,7 +150,7 @@ const PropertyForm = () => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                {({ isSubmitting }) => (
+                {({ isSubmitting, values }) => (
                     <Form className='w-[80%] flex justify-center items-center md:w-full'>
                         <section className='w-full max-w-4xl flex flex-wrap justify-around items-start gap-6'>
                             {/* Property Type */}
@@ -294,21 +294,120 @@ const PropertyForm = () => {
                                 </div>
 
                                 {/* Amenities Fields */}
-                                <div className='label1 w-full'>
-                                    <label>Amenities</label>
-                                    <div>
-                                        <label>
-                                            <Field type="checkbox" name="amenities.kitchen" className="field1" />
-                                            Kitchen
-                                        </label>
+                                <div className='label1 w-full '>
+                                    <label>Amenities:</label>
+                                    <div className='flex flex-wrap gap-2'>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.kitchen" className="field1" />
+                                                Kitchen
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.tv" className="field1" />
+                                                TV
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.satelliteTV" className="field1" />
+                                                satelliteTV
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.wifi" className="field1" />
+                                                wifi
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.petsAllowed" className="field1" />
+                                                petsAllowed
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.washingMachine" className="field1" />
+                                                washingMachine
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.dryer" className="field1" />
+                                                dryer
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.freeParking" className="field1" />
+                                                freeParking
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.smokingAllowed" className="field1" />
+                                                smokingAllowed
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.indoorFireplace" className="field1" />
+                                                indoorFireplace
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.gym" className="field1" />
+                                                gym
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.kidsPlayArea" className="field1" />
+                                                kidsPlayArea
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.swimmingPool" className="field1" />
+                                                swimmingPool
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.hotTub" className="field1" />
+                                                hotTub
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.iron" className="field1" />
+                                                iron
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.elevatorInBuilding" className="field1" />
+                                                elevatorInBuilding
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.airConditioning" className="field1" />
+                                                airConditioning
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.heating" className="field1" />
+                                                heating
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.wheelchairAccessible" className="field1" />
+                                                wheelchairAccessible
+                                            </label>
+                                        </div><div>
+                                            <label>
+                                                <Field type="checkbox" name="amenities.jacuzzi" className="field1" />
+                                                jacuzzi
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <label>
-                                            <Field type="checkbox" name="amenities.tv" className="field1" />
-                                            TV
-                                        </label>
-                                    </div>
-                                    {/* Add more amenities fields as needed */}
                                 </div>
 
                                 {/* House Rules */}
@@ -343,16 +442,25 @@ const PropertyForm = () => {
 
                                 {/* Photos */}
                                 <div className='label1 w-full'>
-                                    <label htmlFor='photos[0].url'>Photos</label>
-                                    <div>
-                                        <Field type="file" name="photos[0].url" placeholder="Photo URL" className="field1" />
-                                        <ErrorMessage name="photos[0].url" component="div" className="error text-red-400" />
-                                    </div>
-                                    <div>
-                                        <Field type="text" name="photos[0].caption" placeholder="Photo Caption" className="field1" />
-                                        <ErrorMessage name="photos[0].caption" component="div" className="error text-red-400" />
-                                    </div>
-                                    {/* Add more photo fields as needed */}
+                                    <label>Photos</label>
+                                    <FieldArray name="photos">
+                                        {({ push, remove }) => (
+                                            <div>
+                                                {values.photos.map((photo, index) => (
+                                                    <div key={index} className='flex flex-col gap-2'>
+                                                        <Field type="file" name={`photos[${index}].url`} placeholder="Photo URL" className="field1" />
+                                                        <ErrorMessage name={`photos[${index}].url`} component="div" className="error text-red-400" />
+                                                        <Field type="text" name={`photos[${index}].caption`} placeholder="Photo Caption" className="field1" />
+                                                        <ErrorMessage name={`photos[${index}].caption`} component="div" className="error text-red-400" />
+                                                        <button type="button" onClick={() => remove(index)} className='py-1 bg-red-300 rounded-full mx-3 hover:border-2 hover:border-red-600'>Remove</button>
+                                                    </div>
+                                                ))}
+                                                <div className='w-full flex justify-center items-center'>
+                                                    <button type="button" className=' w-full py-1 bg-blue-300 rounded-full mx-3 mt-2 hover:border-2 hover:border-blue-600' onClick={() => push({ url: '', caption: '' })}>Add Photo</button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </FieldArray>
                                 </div>
 
                                 {/* Verified */}

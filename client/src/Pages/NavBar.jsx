@@ -14,8 +14,8 @@ const NavBar = () => {
     };
 
     return (
-        <div className="w-full h-auto fixed top-0 left-0 z-50 bg-white shadow-md lg:flex lg:justify-center lg:items-center ">
-            <nav className="w-full lg:w-[80%] flex items-center justify-between px-2 py-1 md:p-4 border-b-2">
+        <div className="w-full h-auto fixed top-0 left-0 z-50 backdrop-blur-sm bg-black/10  lg:flex lg:justify-center lg:items-center ">
+            <nav className="w-full lg:w-[80%] flex items-center justify-between px-2 py-1 md:p-4  ">
                 <div className="flex items-center">
                     <Link to="/">
                         <img src={logo} alt="logo" width={150} className="py-2" />
@@ -61,7 +61,7 @@ const NavBar = () => {
                 </div>
             </nav>
             <div
-                className={`md:hidden bg-gray-100  transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 overflow-hidden opacity-0'
+                className={`md:hidden backdrop-blur-sm bg-black/10  transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 overflow-hidden opacity-0'
                     }`}
             >
                 <Link to="/" className="block py-2 px-3 text-lg font-normal" onClick={toggleMenu}>

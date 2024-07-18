@@ -5,7 +5,7 @@ import Categories from '../component/Categories';
 import FeaturedStay from '../component/FeaturedStay';
 import Faq from '../component/Faq';
 import TimeLine from '../component/TimeLine';
-import { shakleshpura } from '../assets'
+import { hero1, hero2, hero3, hero4, shakleshpura } from '../assets'
 import { Link } from 'react-router-dom'
 import Search from '../component/HomeStays/Search';
 const Home = () => {
@@ -13,10 +13,10 @@ const Home = () => {
         <div className=''>
             <div className="relative w-full  pb-20 h-[80vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-[90vh] 2xl:h-[100vh]">
                 <Carousel className="h-full">
-                    <img src={logo} alt="slider" className="object-cover w-full h-full" />
-                    <img src={logo} alt="slider" className="object-cover w-full h-full" />
-                    <img src={logo} alt="slider" className="object-cover w-full h-full" />
-                    <img src={logo} alt="slider" className="object-cover w-full h-full" />
+                    <img src={hero1} alt="slider" className="object-cover w-full h-full" />
+                    <img src={hero2} alt="slider" className="object-cover w-full h-full" />
+                    <img src={hero3} alt="slider" className="object-cover w-full h-full" />
+                    <img src={hero4} alt="slider" className="object-cover w-full h-full" />
                 </Carousel>
                 <div className="absolute top-[40%] sm:top-[25%] md:top-[40%] lg:top-[40%] xl:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/4">
                     <Search />

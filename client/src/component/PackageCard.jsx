@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from "flowbite-react";
+import { Carousel } from "flowbite-react";
 import { shakleshpura } from "../assets/index"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons"
@@ -13,11 +14,14 @@ const PackageCard = ({ property }) => {
   } = property
   return (
     <div >
-      <Card
-        className="max-w-[16rem] *:p-0 *:gap-1 *:bg-white overflow-hidden"
-        imgAlt="The Greenstay"
-        imgSrc={shakleshpura}
-      >
+      <Card>
+        <Carousel
+          className="max-w-[16rem] *:p-0 *:gap-1 *:bg-white overflow-hidden"
+        >
+          {photos.map((photo) => (
+            <img src={photo.url} alt={photo.caption} />
+          ))}
+        </Carousel>
         <a href="#" className='px-2'>
           <h5 className="text-2xl font-semibold tracking-tight text-gray-900 ">
             {propertyName}
