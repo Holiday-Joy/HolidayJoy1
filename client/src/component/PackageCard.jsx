@@ -3,7 +3,14 @@ import { Card } from "flowbite-react";
 import { shakleshpura } from "../assets/index"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons"
-const PackageCard = () => {
+const PackageCard = ({ property }) => {
+  console.log(property);
+  const {
+    price,
+    exactLocationName,
+    propertyName,
+    photos,
+  } = property
   return (
     <div >
       <Card
@@ -13,9 +20,9 @@ const PackageCard = () => {
       >
         <a href="#" className='px-2'>
           <h5 className="text-2xl font-semibold tracking-tight text-gray-900 ">
-            The GreenStay
+            {propertyName}
           </h5>
-          <p>Shakleshpura</p>
+          <p className='text-sm'>{exactLocationName}</p>
         </a>
         <div className="flex items-center px-2">
           <svg
@@ -63,14 +70,13 @@ const PackageCard = () => {
           </span>
         </div>
         <div className="flex items-center justify-between p-2">
-          <span className="text-3xl font-bold text-gray-900 ">
-            <FontAwesomeIcon icon={faIndianRupeeSign} className='text-2xl' />
-            2,499</span>
+          <span className="text-3xl font-normal text-gray-900 flex items-center justify-center gap-1 ">
+            <FontAwesomeIcon icon={faIndianRupeeSign} className='text-xl' />
+            <p>{price.perHead}</p></span>
           <a
             href="#"
-            className="rounded-xl tracking-wider bg-orange-400 px-5 py-2.5 text-center text-sm font-medium text-black hover:bg-white focus:outline-none hover:ring-4 hover:ring-orange-300 "
-          >
-            Explore
+            className="rounded-xl tracking-wider bg-orange-300 px-5 py-2.5 text-center text-sm font-medium text-black hover:bg-white focus:outline-none hover:ring-2 ">
+            Book Now
           </a>
         </div>
       </Card>
@@ -78,4 +84,4 @@ const PackageCard = () => {
   )
 }
 
-export default PackageCard
+export default PackageCard;

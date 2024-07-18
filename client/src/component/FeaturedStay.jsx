@@ -35,33 +35,33 @@ const FeaturedStay = () => {
             </div>
             <section className='w-full md:w-[80%] flex flex-col md:flex-row justify-start items-center py-10'>
                 <div className=' w-auto h-auto flex flex-col gap-4'>
-                    <div className='flex flex-wrap gap-2'>
+                    <div className='flex flex-wrap gap-2 justify-center items-center md:justify-start'>
                         <button
-                            className='py-3 px-6 border-2 rounded-lg'
+                            className={`py-3 px-6 ${keyword == "" ? "bg-orange-300" : "border-gray-200"} border-2 rounded-lg`}
                             onClick={() => handleKeywordSearch('')}
                         >
                             All
                         </button>
                         <button
-                            className='py-3 px-6 border-2 rounded-lg'
+                            className={`py-3 px-6 ${keyword == "sakleshpura" ? "bg-orange-300" : "border-gray-200"} border-2 rounded-lg`}
                             onClick={() => handleKeywordSearch('sakleshpura')}
                         >
                             Sakleshpura
                         </button>
                         <button
-                            className='py-3 px-6 border-2 rounded-lg'
+                            className={`py-3 px-6 ${keyword == "coorg" ? "bg-orange-300" : "border-gray-200"} border-2 rounded-lg`}
                             onClick={() => handleKeywordSearch('coorg')}
                         >
                             Coorg
                         </button>
                         <button
-                            className='py-3 px-6 border-2 rounded-lg'
+                            className={`py-3 px-6 ${keyword == "chikkamagaluru" ? "bg-orange-300" : "border-gray-200"} border-2 rounded-lg`}
                             onClick={() => handleKeywordSearch('chikkamagaluru')}
                         >
                             Chikkamagaluru
                         </button>
                     </div>
-                    <div className='flex gap-4 flex-wrap'>
+                    <div className='flex gap-4 flex-wrap justify-center items-center md:justify-start'>
                         {error && <p className="text-red-500">Error: {error}</p>}
                         {
                             properties.map((property) => (
