@@ -61,7 +61,7 @@ const FeaturedStay = () => {
                             Chikkamagaluru
                         </button>
                     </div>
-                    <div className='flex gap-4 flex-wrap justify-center items-center md:justify-start md:flex-row'>
+                    <div className='flex'>
                         {error && <p className="text-red-500">Error: {error}</p>}
                         {
                             properties.map((property) => (

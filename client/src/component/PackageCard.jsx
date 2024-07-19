@@ -10,7 +10,7 @@ const PackageCard = ({ property }) => {
     exactLocationName,
     propertyName,
     photos,
-  } = property
+  } = property;
   return (
     <div >
       {
