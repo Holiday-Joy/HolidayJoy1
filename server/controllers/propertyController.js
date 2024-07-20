@@ -4,30 +4,12 @@ const ApiFeatures = require('../utils/apifeatures');
 // Creating a new Property
 exports.propertyList = async (req, res) => {
     try {
-        const { body, files } = req;
+        const property = await Property.create(req.body);
 
-        const photos = await Promise.all(
-            files.map(async (file) => {
-                const result = await cloudinary.uploader.upload_stream({ resource_type: 'image' }, (error, result) => {
-                    if (error) {
-                        throw new Error('Cloudinary upload failed');
-                    }
-                    return result.secure_url;
-                });
-                return { url: result.secure_url, caption: file.originalname };
-            })
-        );
-
-        const newProperty = new Property({
-            ...body,
-            photos,
-        });
-
-        await newProperty.save();
-        res.status(201).json(newProperty);
-    } catch (error) {
-        console.error('Error uploading images:', error);
-        res.status(500).json({ message: 'Error uploading images', error });
+        res.status(201.).json({ success: true, property });
+    }
+    catch (e) {
+        res.status(400).json({ message: e.message });
     }
 };
 
