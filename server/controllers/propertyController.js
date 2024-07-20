@@ -4,12 +4,30 @@ const ApiFeatures = require('../utils/apifeatures');
 // Creating a new Property
 exports.propertyList = async (req, res) => {
     try {
-        const property = await Property.create(req.body);
+        const { body, files } = req;
 
-        res.status(201.).json({ success: true, property });
-    }
-    catch (e) {
-        res.status(400).json({ message: e.message });
+        const photos = await Promise.all(
+            files.map(async (file) => {
+                const result = await cloudinary.uploader.upload_stream({ resource_type: 'image' }, (error, result) => {
+                    if (error) {
+                        throw new Error('Cloudinary upload failed');
+                    }
+                    return result.secure_url;
+                });
+                return { url: result.secure_url, caption: file.originalname };
+            })
+        );
+
+        const newProperty = new Property({
+            ...body,
+            photos,
+        });
+
+        await newProperty.save();
+        res.status(201).json(newProperty);
+    } catch (error) {
+        console.error('Error uploading images:', error);
+        res.status(500).json({ message: 'Error uploading images', error });
     }
 };
 
@@ -20,19 +38,6 @@ exports.getAllPropertys = (async (req, res, next) => {
     res.status(200).json(properties);
 })
 
-
-
-
-
-
-// exports.getAllPropertys = async (req, res) => {
-//     try {
-//         const properties = await Property.find().limit(10);
-//         res.status(200).json(properties);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// };
 
 exports.propertyDetail = async (req, res) => {
     try {
