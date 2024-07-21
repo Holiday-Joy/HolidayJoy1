@@ -18,7 +18,7 @@ class ApiFeatures {
         return this;
     }
     limit() {
-        const limit = parseInt(this.queryStr.limit, 4) || 4; // Default limit to 10 if not provided
+        const limit = parseInt(this.queryStr.limit, 4) || 10; // Default limit to 10 if not provided
         this.query = this.query.limit(limit);
         return this;
     }

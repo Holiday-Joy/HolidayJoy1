@@ -11,6 +11,10 @@ const PropertyForm = () => {
         listEntireHome: false,
         exactLocationName: '',
         popularNearbyLocationName: '',
+        nearbyAttractions: [{
+            name: "",
+            distance: ""
+        }],
         address: {
             country: '',
             city: '',
@@ -73,6 +77,12 @@ const PropertyForm = () => {
         listEntireHome: Yup.boolean().required('Please specify if listing entire home'),
         exactLocationName: Yup.string().required('Exact location name is required'),
         popularNearbyLocationName: Yup.string().required('Popular nearby location name is required'),
+        nearbyAttractions: Yup.array().of(
+            Yup.object().shape({
+                name: Yup.string(),
+                distance: Yup.string()
+            })
+        ),
         address: Yup.object().shape({
             country: Yup.string().required('Country is required'),
             city: Yup.string().required('City is required'),
@@ -452,6 +462,28 @@ const PropertyForm = () => {
                                                         <ErrorMessage name={`photos[${index}].url`} component="div" className="error text-red-400" />
                                                         <Field type="text" name={`photos[${index}].caption`} placeholder="Photo Caption" className="field1" />
                                                         <ErrorMessage name={`photos[${index}].caption`} component="div" className="error text-red-400" />
+                                                        <button type="button" onClick={() => remove(index)} className='py-1 bg-red-300 rounded-full mx-3 hover:border-2 hover:border-red-600'>Remove</button>
+                                                    </div>
+                                                ))}
+                                                <div className='w-full flex justify-center items-center'>
+                                                    <button type="button" className=' w-full py-1 bg-blue-300 rounded-full mx-3 mt-2 hover:border-2 hover:border-blue-600' onClick={() => push({ url: '', caption: '' })}>Add Photo</button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </FieldArray>
+                                </div>
+                                {/*nearbyattraction*/}
+                                <div className='label1 w-full'>
+                                    <label>nearbyAttractions</label>
+                                    <FieldArray name="nearbyAttractions">
+                                        {({ push, remove }) => (
+                                            <div>
+                                                {values.nearbyAttractions.map((attraction, index) => (
+                                                    <div key={index} className='flex flex-col gap-2'>
+                                                        <Field type="text" name={`nearbyAttractions[${index}].name`} placeholder="Attraction name" className="field1" />
+                                                        <ErrorMessage name={`nearbyAttractions[${index}].name`} component="div" className="error text-red-400" />
+                                                        <Field type="number" name={`nearbyAttractions[${index}].distance`} placeholder="Distance" className="field1" />
+                                                        <ErrorMessage name={`nearbyAttractions[${index}].distance`} component="div" className="error text-red-400" />
                                                         <button type="button" onClick={() => remove(index)} className='py-1 bg-red-300 rounded-full mx-3 hover:border-2 hover:border-red-600'>Remove</button>
                                                     </div>
                                                 ))}
