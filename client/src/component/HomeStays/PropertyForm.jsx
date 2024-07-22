@@ -131,7 +131,7 @@ const PropertyForm = () => {
         }),
         photos: Yup.array().of(
             Yup.object().shape({
-                url: Yup.string().required('Photo URL is required'),
+                url: Yup.string(),
                 caption: Yup.string()
             })
         ),
