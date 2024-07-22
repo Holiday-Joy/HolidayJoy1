@@ -13,14 +13,21 @@ exports.propertyList = async (req, res) => {
     }
 };
 
+// Get all properties
 exports.getAllPropertys = (async (req, res, next) => {
     const resultPerPage = 8;
     const apiFeature = new ApiFeatures(Property.find(), req.query)
-        .search().limit().pagination(resultPerPage);
+        .search().pagination(resultPerPage);
     let properties = await apiFeature.query;
     res.status(200).json(properties);
 })
 
+// Get properties for featured stay limit and category
+exports.featuredStay = async(req,res)=>{
+    const apiFeature = new ApiFeatures(Property.find(),req.query).search().limit();
+    let properties = await apiFeature.query;
+    res.status(200).json(properties);
+}
 
 exports.propertyDetail = async (req, res) => {
     try {

@@ -13,7 +13,7 @@ const FeaturedStay = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const link = `https://holidayjoyvecation.onrender.com/api/v1/properties?keyword=${keyword}&limit=4`;
+                const link = `https://holidayjoyvecation.onrender.com/api/v1/featuredstay?keyword=${keyword}&limit=4`;
                 const response = await axios.get(link);
                 setProperties(response.data);
             } catch (e) {
@@ -65,7 +65,13 @@ const FeaturedStay = () => {
                     <section>
                         <div className='flex w-[80%] bg-red-400'>
                             {error && <p className="text-red-500">Error: {error}</p>}
-
+                            {
+                                properties.map((property, index) => (
+                                    <div key={index}>
+                                        <PackageCard property={property} />
+                                    </div>
+                                ))
+                            }
                         </div>
                         <Link to="/properties" className='mt-4 md:mt-0 ml-0 md:ml-4'>
                             <FontAwesomeIcon
