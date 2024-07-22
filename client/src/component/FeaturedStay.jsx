@@ -22,8 +22,9 @@ const FeaturedStay = () => {
         };
 
         fetchProperties();
-    }, [keyword]); // Update properties when keyword changes
 
+    }, [keyword]); // Update properties when keyword changes
+    console.log(properties);
     const handleKeywordSearch = (searchKeyword) => {
         setKeyword(searchKeyword);
     };
@@ -61,21 +62,19 @@ const FeaturedStay = () => {
                             Chikkamagaluru
                         </button>
                     </div>
-                    <div className='flex'>
-                        {error && <p className="text-red-500">Error: {error}</p>}
-                        {
-                            properties.map((property) => (
-                                <PackageCard key={property._id} property={property} />
-                            ))
-                        }
-                    </div>
+                    <section>
+                        <div className='flex w-[80%] bg-red-400'>
+                            {error && <p className="text-red-500">Error: {error}</p>}
+
+                        </div>
+                        <Link to="/properties" className='mt-4 md:mt-0 ml-0 md:ml-4'>
+                            <FontAwesomeIcon
+                                icon={faArrowRight}
+                                className='text-2xl cursor-pointer transform ease-in-out hover:translate-x-1 bg-orange-400 py-3 px-4 rounded-full'
+                            />
+                        </Link>
+                    </section>
                 </div>
-                <Link to="/properties" className='mt-4 md:mt-0 ml-0 md:ml-4'>
-                    <FontAwesomeIcon
-                        icon={faArrowRight}
-                        className='text-2xl cursor-pointer transform ease-in-out hover:translate-x-1 bg-orange-400 py-3 px-4 rounded-full'
-                    />
-                </Link>
             </section>
         </div>
     )
