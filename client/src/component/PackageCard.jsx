@@ -3,8 +3,12 @@ import { Card } from "flowbite-react";
 import { hero1, shakleshpura } from "../assets/index"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons"
+import { useNavigate } from 'react-router-dom';
 const PackageCard = ({ property }) => {
-  console.log(property);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/property/${property._id}`);
+  };
   const {
     price,
     exactLocationName,
@@ -12,7 +16,7 @@ const PackageCard = ({ property }) => {
     photos,
   } = property;
   return (
-    <div >
+    <div onClick={handleClick}>
       {
         photos && photos.map((photo) => (
           <Card

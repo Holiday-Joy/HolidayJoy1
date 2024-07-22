@@ -3,7 +3,6 @@ import axios from 'axios';
 import PackageCard from './PackageCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
 const FeaturedStay = () => {
     const [properties, setProperties] = useState([]);
@@ -62,23 +61,25 @@ const FeaturedStay = () => {
                             Chikkamagaluru
                         </button>
                     </div>
-                    <section>
-                        <div className='flex w-[80%] bg-red-400'>
+                    <section className='flex-col md:flex md:flex-row justify-end items-center'>
+                        <div className='flex w-full flex-wrap   '>
                             {error && <p className="text-red-500">Error: {error}</p>}
-                            {
-                                properties.map((property, index) => (
-                                    <div key={index}>
-                                        <PackageCard property={property} />
-                                    </div>
-                                ))
-                            }
+                            <div className='w-full flex gap-4 flex-wrap justify-center items-center md:justify-start'>
+                                {
+                                    properties.map((property, index) => (
+                                        <div key={index}>
+                                            <PackageCard property={property} />
+                                        </div>
+                                    ))
+                                }
+                            </div>
                         </div>
-                        <Link to="/properties" className='mt-4 md:mt-0 ml-0 md:ml-4'>
+                        <div className='mt-4 md:mt-0 ml-0 md:ml-4 flex justify-center items-center'>
                             <FontAwesomeIcon
                                 icon={faArrowRight}
                                 className='text-2xl cursor-pointer transform ease-in-out hover:translate-x-1 bg-orange-400 py-3 px-4 rounded-full'
                             />
-                        </Link>
+                        </div>
                     </section>
                 </div>
             </section>
