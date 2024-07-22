@@ -423,7 +423,7 @@ const PropertyForm = () => {
                                 {/* House Rules */}
                                 <div className='label1 w-full'>
                                     <label htmlFor="houseRules">House Rules</label>
-                                    <Field as="textarea" id="houseRules" name="houseRules" className="field1" />
+                                    <Field as="textarea" id="houseRules" name="houseRules" className="field1" placeholder="Rules which is not allowed" />
                                     <ErrorMessage name="houseRules" component="div" className="error text-red-400" />
                                 </div>
 
@@ -488,7 +488,7 @@ const PropertyForm = () => {
                                                     </div>
                                                 ))}
                                                 <div className='w-full flex justify-center items-center'>
-                                                    <button type="button" className=' w-full py-1 bg-blue-300 rounded-full mx-3 mt-2 hover:border-2 hover:border-blue-600' onClick={() => push({ url: '', caption: '' })}>Add Photo</button>
+                                                    <button type="button" className=' w-full py-1 bg-blue-300 rounded-full mx-3 mt-2 hover:border-2 hover:border-blue-600' onClick={() => push({ url: '', caption: '' })}>Add</button>
                                                 </div>
                                             </div>
                                         )}

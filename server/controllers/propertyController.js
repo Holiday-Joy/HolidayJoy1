@@ -14,8 +14,9 @@ exports.propertyList = async (req, res) => {
 };
 
 exports.getAllPropertys = (async (req, res, next) => {
+    const resultPerPage = 8;
     const apiFeature = new ApiFeatures(Property.find(), req.query)
-        .search().limit();
+        .search().limit().pagination(resultPerPage);
     let properties = await apiFeature.query;
     res.status(200).json(properties);
 })

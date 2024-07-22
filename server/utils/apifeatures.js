@@ -18,8 +18,14 @@ class ApiFeatures {
         return this;
     }
     limit() {
-        const limit = parseInt(this.queryStr.limit, 4) || 10; // Default limit to 10 if not provided
+        const limit = parseInt(this.queryStr.limit) || 10; // Default limit to 10 if not provided
         this.query = this.query.limit(limit);
+        return this;
+    }
+    pagination(resultPerPage) {
+        const currentPage = Number(this.queryStr.page) || 1;
+        const skip = resultPerPage * (currentPage - 1);
+        this.query = this.query.limit(resultPerPage).skip(skip);
         return this;
     }
 }

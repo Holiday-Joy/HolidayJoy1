@@ -42,7 +42,8 @@ const PropertyDetails = () => {
     description,
     photos,
     houseRules,
-    popularNearbyLocationName
+    popularNearbyLocationName,
+    nearbyAttractions
   } = property;
   // Define a mapping of amenities to corresponding icons and labels
   const amenitiesIcons = {
@@ -133,6 +134,12 @@ const PropertyDetails = () => {
                 </div>
               </div>
             </section>
+            <section className=''>
+              <div>
+                <h1>Know more about us</h1>
+                <p></p>
+              </div>
+            </section>
             <section>
               <Tabs aria-label="Default tabs" variant="default">
                 <Tabs.Item title="Amenities">
@@ -153,17 +160,19 @@ const PropertyDetails = () => {
                 </Tabs.Item>
                 <Tabs.Item title="Nearby Attraction">
                   {/* map this */}
-                  <div className='flex justify-around text-lg font-medium border-b-2 border-gray-200 mb-3'>
-                    <h1>{popularNearbyLocationName}</h1>
-                    <h1>10km</h1>
-                  </div>
+                  {
+                    nearbyAttractions.map(attraction => (
+                      <div className='flex justify-around text-lg font-medium border-b-2 border-gray-200 mb-3'>
+                        <h1>{attraction.name}</h1>
+                        <h1>{attraction.distance}km</h1>
+                      </div>
+                    ))
+                  }
                 </Tabs.Item>
                 <Tabs.Item title="House Rule">
                   <div className='flex gap-4'>
                     {/* map this add if else to success and failure */}
-                    <Badge color="success" className='text-xl'>Free Parking</Badge>
                     <Badge color="failure" className='text-xl'>{houseRules}</Badge>
-                    <Badge color="failure" className='text-xl'>no outside food</Badge>
                   </div>
                 </Tabs.Item>
                 <Tabs.Item title="Location">
