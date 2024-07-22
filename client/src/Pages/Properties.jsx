@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import PackagePack from '../component/HomeStays/PackagePack';
 import Search from '../component/HomeStays/Search';
-import { Spinner } from "flowbite-react";
+import { Spinner, Pagination } from "flowbite-react";
 
 // Custom hook to get query parameters
 const useQuery = () => {
@@ -15,10 +15,10 @@ const Properties = () => {
     const [error, setError] = useState(null);
     const query = useQuery();
     const keyword = query.get('keyword') || "";
-
+    const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => {
         const fetchProperties = async () => {
-            const link = `https://holidayjoyvecation.onrender.com/api/v1/properties?keyword=${keyword}`;
+            const link = `https://holidayjoyvecation.onrender.com/api/v1/properties?keyword=${keyword}&page=${currentPage}`;
             try {
                 await axios.get(link).then((response) => setProperties(response.data));
             } catch (e) {
@@ -26,12 +26,12 @@ const Properties = () => {
             }
         };
         fetchProperties();
-    }, [keyword]);
+    }, [keyword, currentPage]);
 
     if (properties.length === 0) return <div className='w-full h-[100vh] flex justify-center items-center'>
         <Spinner aria-label="Extra large spinner example" size="xl" />
     </div>
-
+    const onPageChange = (page) => setCurrentPage(page);
     if (error) return <p>Error loading properties: {error}</p>;
 
     return (
@@ -40,12 +40,15 @@ const Properties = () => {
                 <div className='flex  justify-center items-center'>
                     <Search />
                 </div>
-                <h1 className='py-6 text-4xl font-normal'>Curated HomeStays {keyword}</h1>
+                <h1 className='py-6 text-4xl font-normal'>Curated HomeStay {keyword}</h1>
                 <div className='w-full flex flex-col justify-between items-start gap-6 md:p-6 border-2 rounded-lg'>
                     {properties.map((property) => (
                         // this component is to show case show case HomeStays in Packs
                         <PackagePack key={property._id} property={property} />
                     ))}
+                </div>
+                <div className="flex overflow-x-auto sm:justify-center ">
+                    <Pagination currentPage={currentPage} totalPages={100} onPageChange={onPageChange} />
                 </div>
             </div>
         </div>
