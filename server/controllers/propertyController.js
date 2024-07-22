@@ -1,17 +1,43 @@
 const Property = require("../models/propertyModel");
 const ApiFeatures = require('../utils/apifeatures');
-
-// Creating a new Property
+const cloudinary = require('../config/cloudinaryCofig');
+// Creating a new Property  with image uploads to Cloudinary
 exports.propertyList = async (req, res) => {
     try {
-        const property = await Property.create(req.body);
+        const photos = req.body.photos;
+        const uploadPromises = photos.map(photo => {
+            return cloudinary.uploader.upload(photo.url, { folder: 'properties' });
+        });
 
-        res.status(201.).json({ success: true, property });
-    }
-    catch (e) {
+        const uploadResults = await Promise.all(uploadPromises);
+        const updatedPhotos = uploadResults.map((result, index) => ({
+            url: result.secure_url,
+            caption: photos[index].caption
+        }));
+
+        const propertyData = {
+            ...req.body,
+            photos: updatedPhotos,
+        };
+
+        const property = await Property.create(propertyData);
+
+        res.status(201).json({ success: true, property });
+    } catch (e) {
         res.status(400).json({ message: e.message });
     }
 };
+
+// exports.propertyList = async (req, res) => {
+//     try {
+//         const property = await Property.create(req.body);
+
+//         res.status(201.).json({ success: true, property });
+//     }
+//     catch (e) {
+//         res.status(400).json({ message: e.message });
+//     }
+// };
 
 // Get all properties
 exports.getAllPropertys = (async (req, res, next) => {
@@ -23,8 +49,8 @@ exports.getAllPropertys = (async (req, res, next) => {
 })
 
 // Get properties for featured stay limit and category
-exports.featuredStay = async(req,res)=>{
-    const apiFeature = new ApiFeatures(Property.find(),req.query).search().limit();
+exports.featuredStay = async (req, res) => {
+    const apiFeature = new ApiFeatures(Property.find(), req.query).search().limit();
     let properties = await apiFeature.query;
     res.status(200).json(properties);
 }

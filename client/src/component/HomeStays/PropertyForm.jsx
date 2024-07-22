@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -139,7 +139,21 @@ const PropertyForm = () => {
         websiteURL: Yup.string(),
         additionalPropertyLinks: Yup.array()
     });
+    const [photos, setPhotos] = useState([]);
 
+    const handleFileChange = (e, index) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const newPhotos = [...photos];
+                newPhotos[index] = { ...newPhotos[index], url: reader.result };
+                setPhotos(newPhotos);
+            };
+            console.log(photos);
+            reader.readAsDataURL(file);
+        }
+    };
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
             const url = "https://holidayjoyvecation.onrender.com/api/v1"
@@ -153,6 +167,12 @@ const PropertyForm = () => {
         }
 
     };
+    useEffect(() => {
+        if (photos.length === 0) {
+            setPhotos([{ url: '', caption: '' }]);
+        }
+    }, []);
+
     return (
         <div className='mt-24 w-full flex justify-center items-center'>
             <Formik
@@ -458,9 +478,13 @@ const PropertyForm = () => {
                                             <div>
                                                 {values.photos.map((photo, index) => (
                                                     <div key={index} className='flex flex-col gap-2'>
-                                                        <Field type="file" name={`photos[${index}].url`} placeholder="Photo URL" className="field1" />
-                                                        <ErrorMessage name={`photos[${index}].url`} component="div" className="error text-red-400" />
+                                                        <input
+                                                            type="file"
+                                                            onChange={(e) => handleFileChange(e, index)}
+                                                            className="field1"
+                                                        />
                                                         <Field type="text" name={`photos[${index}].caption`} placeholder="Photo Caption" className="field1" />
+                                                        <ErrorMessage name={`photos[${index}].url`} component="div" className="error text-red-400" />
                                                         <ErrorMessage name={`photos[${index}].caption`} component="div" className="error text-red-400" />
                                                         <button type="button" onClick={() => remove(index)} className='py-1 bg-red-300 rounded-full mx-3 hover:border-2 hover:border-red-600'>Remove</button>
                                                     </div>
