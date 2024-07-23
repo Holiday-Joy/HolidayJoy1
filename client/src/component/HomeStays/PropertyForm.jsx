@@ -144,34 +144,20 @@ const PropertyForm = () => {
     const handleFileChange = (e, index) => {
         const file = e.target.files[0];
         if (file) {
-            const newPhotos = [...photos];
-            newPhotos[index] = file;
-            setPhotos(newPhotos);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const newPhotos = [...photos];
+                newPhotos[index] = { ...newPhotos[index], url: reader.result };
+                setPhotos(newPhotos);
+            };
+            console.log(photos);
+            reader.readAsDataURL(file);
         }
     };
-
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
-            const formData = new FormData();
-            // Append all form values except photos
-            Object.keys(values).forEach(key => {
-                if (key !== 'photos') {
-                    formData.append(key, values[key]);
-                }
-            });
-            // Append photos
-            photos.forEach((photo, index) => {
-                formData.append('photos', photo);
-                formData.append(`photos[${index}].caption`, values.photos[index].caption);
-            });
-
-            const url = "https://holidayjoyvecation.onrender.com/api/v1/list";
-            await axios.post(url, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-
+            const url = "https://holidayjoyvecation.onrender.com/api/v1"
+            await axios.post(url + '/list', values);
             alert('Property submitted successfully!');
             setSubmitting(false);
         } catch (error) {
@@ -179,11 +165,11 @@ const PropertyForm = () => {
             alert('Error submitting property. Please try again.');
             setSubmitting(false);
         }
-    };
 
+    };
     useEffect(() => {
         if (photos.length === 0) {
-            setPhotos([null]);
+            setPhotos([{ url: '', caption: '' }]);
         }
     }, []);
 
@@ -488,26 +474,27 @@ const PropertyForm = () => {
                                 <div className='label1 w-full'>
                                     <label>Photos</label>
                                     <FieldArray name="photos">
-                            {({ push, remove }) => (
-                                <div>
-                                    {values.photos.map((photo, index) => (
-                                        <div key={index} className='flex flex-col gap-2'>
-                                            <input
-                                                type="file"
-                                                onChange={(e) => handleFileChange(e, index)}
-                                                className="field1"
-                                            />
-                                            <Field type="text" name={`photos[${index}].caption`} placeholder="Photo Caption" className="field1" />
-                                            <ErrorMessage name={`photos[${index}].caption`} component="div" className="error text-red-400" />
-                                            <button type="button" onClick={() => remove(index)} className='py-1 bg-red-300 rounded-full mx-3 hover:border-2 hover:border-red-600'>Remove</button>
-                                        </div>
-                                    ))}
-                                    <div className='w-full flex justify-center items-center'>
-                                        <button type="button" className='w-full py-1 bg-blue-300 rounded-full mx-3 mt-2 hover:border-2 hover:border-blue-600' onClick={() => push({ url: '', caption: '' })}>Add Photo</button>
-                                    </div>
-                                </div>
-                            )}
-                        </FieldArray>
+                                        {({ push, remove }) => (
+                                            <div>
+                                                {values.photos.map((photo, index) => (
+                                                    <div key={index} className='flex flex-col gap-2'>
+                                                        <input
+                                                            type="file"
+                                                            onChange={(e) => handleFileChange(e, index)}
+                                                            className="field1"
+                                                        />
+                                                        <Field type="text" name={`photos[${index}].caption`} placeholder="Photo Caption" className="field1" />
+                                                        <ErrorMessage name={`photos[${index}].url`} component="div" className="error text-red-400" />
+                                                        <ErrorMessage name={`photos[${index}].caption`} component="div" className="error text-red-400" />
+                                                        <button type="button" onClick={() => remove(index)} className='py-1 bg-red-300 rounded-full mx-3 hover:border-2 hover:border-red-600'>Remove</button>
+                                                    </div>
+                                                ))}
+                                                <div className='w-full flex justify-center items-center'>
+                                                    <button type="button" className=' w-full py-1 bg-blue-300 rounded-full mx-3 mt-2 hover:border-2 hover:border-blue-600' onClick={() => push({ url: '', caption: '' })}>Add Photo</button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </FieldArray>
                                 </div>
                                 {/*nearbyattraction*/}
                                 <div className='label1 w-full'>
