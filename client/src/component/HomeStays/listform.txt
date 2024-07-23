@@ -1,0 +1,33 @@
+const [photos, setPhotos] = useState([]);
+
+    const handleFileChange = (e, index) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const newPhotos = [...photos];
+                newPhotos[index] = { ...newPhotos[index], url: reader.result };
+                setPhotos(newPhotos);
+            };
+            console.log(photos);
+            reader.readAsDataURL(file);
+        }
+    };
+    const handleSubmit = async (values, { setSubmitting }) => {
+        try {
+            const url = "https://holidayjoyvecation.onrender.com/api/v1"
+            await axios.post(url + '/list', values);
+            alert('Property submitted successfully!');
+            setSubmitting(false);
+        } catch (error) {
+            console.error('Error submitting property:', error);
+            alert('Error submitting property. Please try again.');
+            setSubmitting(false);
+        }
+
+    };
+    useEffect(() => {
+        if (photos.length === 0) {
+            setPhotos([{ url: '', caption: '' }]);
+        }
+    }, []);
