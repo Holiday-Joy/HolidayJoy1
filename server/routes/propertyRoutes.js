@@ -7,7 +7,9 @@ const uploadMiddleware = require("../middleware/uploadMiddleware");
 // const upload = multer({ storage });
 
 // Listing a Property
-router.post('/list', uploadMiddleware, propertyController.propertyList);
+router.post('/list',
+    //  uploadMiddleware,
+    propertyController.propertyList);
 
 // Get All Property on search and pagination
 router.get('/properties', propertyController.getAllPropertys);

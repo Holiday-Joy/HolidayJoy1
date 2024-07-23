@@ -139,21 +139,21 @@ const PropertyForm = () => {
         websiteURL: Yup.string(),
         additionalPropertyLinks: Yup.array()
     });
-    const [photos, setPhotos] = useState([]);
+    // const [photos, setPhotos] = useState([]);
 
-    const handleFileChange = (e, index) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const newPhotos = [...photos];
-                newPhotos[index] = { ...newPhotos[index], url: reader.result };
-                setPhotos(newPhotos);
-            };
-            console.log(photos);
-            reader.readAsDataURL(file);
-        }
-    };
+    // const handleFileChange = (e, index) => {
+    //     const file = e.target.files[0];
+    //     if (file) {
+    //         const reader = new FileReader();
+    //         reader.onloadend = () => {
+    //             const newPhotos = [...photos];
+    //             newPhotos[index] = { ...newPhotos[index], url: reader.result };
+    //             setPhotos(newPhotos);
+    //         };
+    //         console.log(photos);
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
             const url = "https://holidayjoyvecation.onrender.com/api/v1"
@@ -167,11 +167,11 @@ const PropertyForm = () => {
         }
 
     };
-    useEffect(() => {
-        if (photos.length === 0) {
-            setPhotos([{ url: '', caption: '' }]);
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (photos.length === 0) {
+    //         setPhotos([{ url: '', caption: '' }]);
+    //     }
+    // }, []);
 
     return (
         <div className='mt-24 w-full flex justify-center items-center'>
@@ -480,7 +480,7 @@ const PropertyForm = () => {
                                                     <div key={index} className='flex flex-col gap-2'>
                                                         <input
                                                             type="file"
-                                                            onChange={(e) => handleFileChange(e, index)}
+                                                            // onChange={(e) => handleFileChange(e, index)}
                                                             className="field1"
                                                         />
                                                         <Field type="text" name={`photos[${index}].caption`} placeholder="Photo Caption" className="field1" />
