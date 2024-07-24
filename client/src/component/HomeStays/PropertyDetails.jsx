@@ -53,6 +53,7 @@ const PropertyDetails = () => {
     price,
     amenities,
     propertyName,
+    exactLocationName,
     description,
     photos,
     houseRules,
@@ -214,7 +215,7 @@ const PropertyDetails = () => {
           </article>
           {/* right side form */}
           <div>
-            <RequestBookForm price={price} />
+            <RequestBookForm price={price} propertyName={propertyName} location={exactLocationName} />
           </div>
         </section>
       </div >

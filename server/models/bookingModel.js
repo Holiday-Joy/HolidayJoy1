@@ -33,7 +33,12 @@ const bookingRequestSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-
+    propertyName: {
+        type: String,
+    },
+    propertylocation: {
+        type: String,
+    },
     price: {
         type: Number,
         required: true,

@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from 'react';
 import axios from 'axios';
 
-const RequestBookForm = ({ price }) => {
+const RequestBookForm = ({ price, location, propertyName }) => {
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -27,7 +27,9 @@ const RequestBookForm = ({ price }) => {
             adultsCount: formData.adultsCount,
             kidsCount: formData.kidsCount,
             message: formData.message,
-            price: price.perHead || 5000,
+            propertyName: propertyName || "",
+            propertylocation: location || "",
+            price: price.perHead || 0,
         };
         console.log(bookingData);
         try {

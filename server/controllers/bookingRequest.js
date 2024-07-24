@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.post('/book', async (req, res) => {
     try {
-        const { name, email, number, checkInDate, checkOutDate, adultsCount, kidsCount, message, price } = req.body;
-        console.log(name, email, number, checkInDate, checkOutDate, adultsCount, kidsCount, message, price);
+        const { name, email, number, checkInDate, checkOutDate, adultsCount, kidsCount, message, propertyName, propertylocation, price } = req.body;
+        console.log(name, email, number, checkInDate, checkOutDate, adultsCount, kidsCount, message, propertyName, propertylocation, price);
         const bookingRequest = new BookingRequest({
             name,
             email,
@@ -18,6 +18,8 @@ router.post('/book', async (req, res) => {
             adultsCount,
             kidsCount,
             message,
+            propertyName,
+            propertylocation,
             price,
         });
 
@@ -49,13 +51,16 @@ router.post('/book', async (req, res) => {
         Adults: ${adultsCount}
         Kids: ${kidsCount}
         Message: ${message}
+        PropertyName :${propertyName}
+        PropertyLocation:${propertylocation}
         Price: ${price}
+
       `,
         };
 
         // Send email
         await transporter.sendMail(mailOptions);
-        res.status(200).json({ message: 'Booking request saved and email sent to host.' });
+        res.status(200).json({ message: 'Booking request sent to host they will contact you soon.' });
     } catch (error) {
         res.status(500).json({ message: 'An error occurred', error });
     }
