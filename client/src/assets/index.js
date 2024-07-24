@@ -8,7 +8,11 @@ import hero4 from "../assets/images/icons/hero-banner-4.jpg"
 // Images
 import shakleshpura from "./images/sakleshpur/sakleshpur-homestay-GS-02.jpeg";
 import shakleshpura1 from "./images/sakleshpur/sakleshpur-homestay-GS-20.jpg"
-import shakleshpura2 from "./images/sakleshpur/sakleshpur-homestay-GS-04.jpg"
+import shakleshpura2 from "./images/sakleshpur/sakleshpur-homestay-GS-04.jpg";
+import propertDeatails1 from "./images/sakleshpur/sakleshpur-homestay-GS-01.jpg";
+import propertDeatails2 from "./images/sakleshpur/sakleshpur-homestay-GS-06.jpg";
+import propertDeatails3 from "./images/sakleshpur/sakleshpur-homestay-GS-15.jpeg";
+
 
 // icons
 import shakIcon from './images/icons/sakleshpur-hill-icon.png';
@@ -24,6 +28,9 @@ export {
     shakleshpura,
     shakleshpura1,
     shakleshpura2,
+    propertDeatails1,
+    propertDeatails2,
+    propertDeatails3,
     // icons
     shakIcon, goaIcon, chikaIcon, wayIcon, coorgIcon, ootyIcon
 };

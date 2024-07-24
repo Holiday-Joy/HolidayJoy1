@@ -2,11 +2,12 @@ import React from 'react';
 import { Carousel } from 'flowbite-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faHome, faTv, faStar, faIndianRupeeSign
+    faHome, faTv, faStar, faIndianRupeeSign, faWifi, faPaw, faParking, faSwimmingPool,
+    faHotTub
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import whatsapp from '../../assets/whatsapp-icon.svg';
-
+import { propertDeatails1, propertDeatails2, propertDeatails3 } from '../../assets';
 const PackagePack = ({ property }) => {
     const navigate = useNavigate();
     const handleClick = () => {
@@ -17,8 +18,9 @@ const PackagePack = ({ property }) => {
         <div className='flex flex-col md:flex-row gap-6 w-full border-2 p-4 shadow-lg rounded-lg'>
             <section className='w-full h-60 md:w-1/2 md:h-auto'>
                 <Carousel indicators={false}>
-                    <img src="https://via.placeholder.com/300x200" alt="img1" className='w-full h-full object-cover' />
-                    <img src="https://via.placeholder.com/300x200" alt="img2" className='w-full h-full object-cover' />
+                    <img src={propertDeatails1} alt="img1" className='w-full h-full object-cover' />
+                    <img src={propertDeatails2} alt="img2" className='w-full h-full object-cover' />
+                    <img src={propertDeatails3} alt="img2" className='w-full h-full object-cover' />
                     {/* {property.photos.map((photo, index) => (
                              <img key={index} src={photo.url} alt={`Property photo ${index + 1}`} className='w-full h-full object-cover' />
                          ))} */}
@@ -28,9 +30,14 @@ const PackagePack = ({ property }) => {
                 <div className='cursor-pointer' onClick={handleClick}>
                     <h1 className='text-2xl md:text-4xl font-medium'>{property.propertyName}</h1>
                     <p className='pl-2'>{property.exactLocationName}</p>
-                    <div className='py-3 flex gap-3 text-orange-500 lg:text-2xl'>
+                    <div className='py-3 flex gap-3 text-red-400 lg:text-xl'>
                         {property.amenities.kitchen && <FontAwesomeIcon icon={faHome} />}
                         {property.amenities.tv && <FontAwesomeIcon icon={faTv} />}
+                        {property.amenities.wifi && <FontAwesomeIcon icon={faWifi} />}
+                        {property.amenities.petsAllowed && <FontAwesomeIcon icon={faPaw} />}
+                        {property.amenities.freeParking && <FontAwesomeIcon icon={faParking} />}
+                        {property.amenities.hotTub && <FontAwesomeIcon icon={faHotTub} />}
+                        {property.amenities.swimmingPool && <FontAwesomeIcon icon={faSwimmingPool} />}
                         {/* Add other amenity icons here */}
                     </div>
                     <div className='flex gap-1 items-center text-sm'>

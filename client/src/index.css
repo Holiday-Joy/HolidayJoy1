@@ -8,3 +8,6 @@
 .field1 {
   @apply border border-gray-500 px-2 py-1 rounded-md;
 }
+.featuredStaypack {
+  @apply w-full flex gap-4 flex-wrap justify-center items-center md:justify-start;
+}

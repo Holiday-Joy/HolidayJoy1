@@ -16,6 +16,7 @@ const Properties = () => {
     const query = useQuery();
     const keyword = query.get('keyword') || "";
     const [currentPage, setCurrentPage] = useState(1);
+    const onPageChange = (page) => setCurrentPage(page);
     useEffect(() => {
         const fetchProperties = async () => {
             const link = `https://holidayjoyvecation.onrender.com/api/v1/properties?keyword=${keyword}&page=${currentPage}`;
@@ -28,10 +29,13 @@ const Properties = () => {
         fetchProperties();
     }, [keyword, currentPage]);
 
-    if (properties.length === 0) return <div className='w-full h-[100vh] flex justify-center items-center'>
-        <Spinner aria-label="Extra large spinner example" size="xl" />
-    </div>
-    const onPageChange = (page) => setCurrentPage(page);
+    if (properties.length === 0)
+        return <div className='w-full h-[100vh] flex justify-center items-center flex-col'>
+            <Spinner aria-label="Extra large spinner example" size="xl" />
+            <div className="flex overflow-x-auto sm:justify-center ">
+                <Pagination currentPage={currentPage} totalPages={100} onPageChange={onPageChange} />
+            </div>
+        </div>
     if (error) return <p>Error loading properties: {error}</p>;
 
     return (

@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import { shakleshpura, shakleshpura1, shakleshpura2 } from '../../assets';
+import { propertDeatails1, propertDeatails2, propertDeatails3, shakleshpura, shakleshpura1, shakleshpura2 } from '../../assets';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faBed, faBath, faPeopleGroup, faPersonSwimming, faParking, faTv, faPaw, faWifi, faStar, faIndianRupeeSign, faPhone, faKitchenSet } from '@fortawesome/free-solid-svg-icons'
+import {
+  faKitchenSet,
+  faStar, faPhone,
+  faTv,
+  faSatelliteDish,
+  faWifi,
+  faPaw,
+  faParking,
+  faSmoking,
+  faDumbbell,
+  faChild,
+  faSwimmingPool,
+  faHotTub,
+  faElevator,
+  faFan,
+  faWheelchair,
+  faBath
+} from '@fortawesome/free-solid-svg-icons';
+
 import { Avatar, Badge, Button, TextInput, Datepicker } from "flowbite-react";
 import { Tabs } from "flowbite-react";
-import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
-import { MdDashboard } from "react-icons/md";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Search from "../HomeStays/Search";
-import Recommend from '../Recommend';
 import RequestBookForm from './RequestBookForm';
 import { Spinner } from "flowbite-react";
 const PropertyDetails = () => {
@@ -45,18 +59,30 @@ const PropertyDetails = () => {
     popularNearbyLocationName,
     nearbyAttractions
   } = property;
-  // Define a mapping of amenities to corresponding icons and labels
+
   const amenitiesIcons = {
     kitchen: { icon: faKitchenSet, label: 'Kitchen' },
     tv: { icon: faTv, label: 'TV' },
-    wifi: { icon: faWifi, label: 'WiFi' },
+    satelliteTV: { icon: faSatelliteDish, label: 'Satellite TV' },
+    wifi: { icon: faWifi, label: 'Wi-Fi' },
+    petsAllowed: { icon: faPaw, label: 'Pets Allowed' },
+    washingMachine: { icon: "", label: 'Washing Machine' },
+    dryer: { icon: "", label: 'Dryer' },
     freeParking: { icon: faParking, label: 'Free Parking' },
-    swimmingPool: { icon: faPersonSwimming, label: 'Swimming Pool' },
-    // Add other amenities as needed
+    smokingAllowed: { icon: faSmoking, label: 'Smoking Allowed' },
+    indoorFireplace: { icon: "", label: 'Indoor Fireplace' },
+    gym: { icon: faDumbbell, label: 'Gym' },
+    kidsPlayArea: { icon: faChild, label: 'Kids Play Area' },
+    swimmingPool: { icon: faSwimmingPool, label: 'Swimming Pool' },
+    hotTub: { icon: faHotTub, label: 'Hot Tub' },
+    iron: { icon: "", label: 'Iron' },
+    elevatorInBuilding: { icon: faElevator, label: 'Elevator in Building' },
+    airConditioning: { icon: faFan, label: 'Air Conditioning' },
+    heating: { icon: "", label: 'Heating' },
+    wheelchairAccessible: { icon: faWheelchair, label: 'Wheelchair Accessible' },
+    jacuzzi: { icon: faBath, label: 'Jacuzzi' }
   };
-
   const amenitiesArray = Object.keys(amenities).filter(key => amenities[key]);
-
 
   return (
     <div className='w-full flex justify-center items-center mt-24'>
@@ -67,9 +93,9 @@ const PropertyDetails = () => {
         <section className='flex w-full h-auto justify-center items-center'>
           <div className="flex w-full flex-wrap md:flex-nowrap">
             {/* Main image */}
-            <div className="w-full md:w-7/10 lg:w-[95%] p-2 ">
+            <div className="w-full md:w-7/10 lg:w-[75%] p-2 ">
               <img
-                src="https://via.placeholder.com/700x400"
+                src={propertDeatails1}
                 alt="Main"
                 className="w-full h-auto object-cover rounded-xl overflow-hidden"
               />
@@ -77,14 +103,14 @@ const PropertyDetails = () => {
             <div className="w-full md:w-3/10 lg:w-[40%] flex flex-col ">
               <div className="w-full p-2 ">
                 <img
-                  src="https://via.placeholder.com/300x200"
+                  src={propertDeatails2}
                   alt="Top"
                   className="w-full h-auto object-cover rounded-xl overflow-hidden bg-red-400"
                 />
               </div>
-              <div className="w-full p-2">
+              <div className="w-full h-auto p-2">
                 <img
-                  src="https://via.placeholder.com/300x200"
+                  src={propertDeatails3}
                   alt="Bottom"
                   className="w-full h-auto object-cover rounded-xl overflow-hidden bg-red-400"
                 />
@@ -159,15 +185,18 @@ const PropertyDetails = () => {
                   </div>
                 </Tabs.Item>
                 <Tabs.Item title="Nearby Attraction">
-                  {/* map this */}
-                  {
-                    nearbyAttractions.map(attraction => (
-                      <div className='flex justify-around text-lg font-medium border-b-2 border-gray-200 mb-3'>
-                        <h1>{attraction.name}</h1>
-                        <h1>{attraction.distance}km</h1>
-                      </div>
-                    ))
-                  }
+                  <div className='text-black '>
+                    {/* map this */}
+                    {
+                      nearbyAttractions.map(attraction => (
+                        <div className='flex justify-around text-lg font-medium border-b-2 border-gray-200 mb-3'>
+                          <h1>{attraction.name}</h1>
+                          <h1>{attraction.distance}km</h1>
+                          <h1>helloo</h1>
+                        </div>
+                      ))
+                    }
+                  </div>
                 </Tabs.Item>
                 <Tabs.Item title="House Rule">
                   <div className='flex gap-4'>
