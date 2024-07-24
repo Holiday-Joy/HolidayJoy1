@@ -4,7 +4,7 @@ const Faq = () => {
 
     // error hove some syntax error in inspect
     return (
-        <div className=' w-full flex justify-center items-center my-10'>
+        <div className=' w-full flex justify-center items-center my-10 py-16'>
             <Accordion collapseAll className='w-[80%] '>
                 <h1 className='text-4xl ml-4 py-5'>
                     FAQ's

@@ -29,7 +29,7 @@ const FeaturedStay = () => {
     };
 
     return (
-        <div className='w-full flex flex-col justify-center items-center'>
+        <div className='w-full flex flex-col justify-center items-center py-24'>
             <div className='w-full md:w-[80%]'>
                 <h1 className='pt-6 pb-4 text-3xl md:text-4xl font-semibold tracking-wider text-center'>Featured Stay</h1>
             </div>

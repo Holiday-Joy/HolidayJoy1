@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button, Timeline } from "flowbite-react";
 import { HiArrowNarrowRight } from "react-icons/hi";
-import { shakleshpura } from '../assets';
+import { shakleshpura, blog1, blog2, blog3 } from '../assets';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons"
 const TimeLine = () => {
     return (
-        <div className=' w-full flex flex-col justify-center items-center my-10'>
+        <div className=' w-full flex flex-col justify-center items-center my-10 py-10'>
             <Timeline className='w-[80%]' >
                 <Timeline.Item>
                     <Timeline.Point />
@@ -14,7 +14,7 @@ const TimeLine = () => {
                         <Timeline.Time>March 2022</Timeline.Time>
                         <div className=' lg:flex  gap-5'>
                             <div className='w-auto lg:w-auto h-auto fancyBorder overflow-hidden'>
-                                <img src={shakleshpura} alt="shakaleshpura" className='' />
+                                <img src={blog1} alt="shakaleshpura" className='' />
                             </div>
                             <div>
                                 <Timeline.Title>Discover Ooty: The Queen of Hill Stations</Timeline.Title>
@@ -34,7 +34,7 @@ const TimeLine = () => {
                         </div>
                     </Timeline.Content>
                 </Timeline.Item>
-                <Timeline.Item>
+                <Timeline.Item className='bg-slate-300 p-5 rounded-3xl'>
                     <Timeline.Point />
                     <Timeline.Content>
                         <Timeline.Time>March 2022</Timeline.Time>
@@ -57,8 +57,8 @@ const TimeLine = () => {
                                     </Button>
                                 </Timeline.Body>
                             </div>
-                            <div className='fancyBorder1 overflow-hidden'>
-                                <img src={shakleshpura} alt="shakaleshpura" width={900} />
+                            <div className='fancyBorder1 overflow-hidden bg-contain'>
+                                <img src={blog2} alt="shakaleshpura" width={900} />
                             </div>
                         </div>
                     </Timeline.Content>
@@ -69,7 +69,7 @@ const TimeLine = () => {
                         <Timeline.Time>April 2022</Timeline.Time>
                         <div className=' lg:flex gap-5'>
                             <div className='fancyBorder2 overflow-hidden'>
-                                <img src={shakleshpura} alt="shakaleshpura" width={900} />
+                                <img src={blog3} alt="shakaleshpura" width={900} />
                             </div>
                             <div>
                                 <Timeline.Title>Royal Grandeur of Bangalore Palace: A Step Back in Time</Timeline.Title>

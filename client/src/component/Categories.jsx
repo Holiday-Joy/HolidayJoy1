@@ -10,7 +10,7 @@ const Categories = () => {
     const list = [
         {
             img: shakIcon,
-            name: "Sakleshpura",
+            name: "Sakleshpur",
             des: "10 resorts, 15 Homestays"
         },
         {
@@ -59,7 +59,7 @@ const Categories = () => {
                                 <p className=' text-lg font-medium'>{item.name}</p>
                                 <p className=' text-sm text-gray-700'>{item.des}</p>
                             </span>
-                            <FontAwesomeIcon icon={faArrowRight} onClick={() => handleCategory(item)} className='text-xl sm:text-2xl cursor-pointer transform ease-in-out hover:-translate-y-1 bg-orange-400 py-3 px-4 ml-0 sm:ml-8 rounded-full sm:mt-0' />
+                            <FontAwesomeIcon icon={faArrowRight} onClick={() => handleCategory(item)} className=' text-xl sm:text-2xl cursor-pointer transform ease-in-out hover:translate-x-1 bg-orange-300 py-3 px-4 ml-0 sm:ml-8 rounded-full sm:mt-0' />
                         </div>
                     ))}
                 </section>

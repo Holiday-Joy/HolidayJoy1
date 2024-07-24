@@ -17,7 +17,9 @@ import {
   faElevator,
   faFan,
   faWheelchair,
-  faBath
+  faBath,
+  faCircleDot,
+  faWarning
 } from '@fortawesome/free-solid-svg-icons';
 
 import { Avatar, Badge, Button, TextInput, Datepicker } from "flowbite-react";
@@ -123,7 +125,7 @@ const PropertyDetails = () => {
           <article className='lg:m-2 p-2 w-full md:w-[60%] '>
             <div className='flex justify-between items-start'>
               <div>
-                <h1 className='text-4xl'>{propertyName}</h1>
+                <h1 className='text-4xl font-medium'>{propertyName}</h1>
                 <p>{address.city}, {address.landMark}, {address.pincode}</p>
               </div>
               <div>
@@ -135,7 +137,7 @@ const PropertyDetails = () => {
             </div>
             <section className='p-2 mt-4 mb-9'>
               <div>
-                <h1 className='text-2xl py-4'>Meet Your Host </h1>
+                <h1 className='text-2xl py-4 font-medium'>Meet Your Host </h1>
               </div>
               <div className='flex flex-wrap gap-8'>
                 <div className=' w-auto h-auto px-6 py-4 flex flex-col md:flex-row justify-center items-center border-[2px] gap-5 rounded-xl shadow-xl'>
@@ -161,10 +163,12 @@ const PropertyDetails = () => {
                 </div>
               </div>
             </section>
-            <section className=''>
+            <section className='py-10'>
               <div>
-                <h1>Know more about us</h1>
-                <p></p>
+                <h1 className='text-2xl py-2 font-medium'>Know more about us</h1>
+                <p className='text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quod aliquid voluptas nulla.
+                  Ex, magni quis minima officia eaque ab, iste nisi dignissimos maxime incidunt laboriosam veniam nemo
+                  ducimus quo!</p>
               </div>
             </section>
             <section>
@@ -174,8 +178,8 @@ const PropertyDetails = () => {
                     {/* map this */}
 
                     {amenitiesArray.map(item => (
-                      <div key={item} className='flex items-center gap-2 py-2 px-6 rounded-full border-2 border-black'>
-                        <FontAwesomeIcon icon={amenitiesIcons[item]?.icon || faTv} />
+                      <div key={item} className='flex items-center gap-2 py-2 px-6 rounded-full text-orange-600 border-2 border-gray-400'>
+                        <FontAwesomeIcon icon={amenitiesIcons[item]?.icon || faCircleDot} />
                         <h1>{amenitiesIcons[item]?.label || item}</h1>
                       </div>
                     ))}
@@ -200,9 +204,10 @@ const PropertyDetails = () => {
                   </div>
                 </Tabs.Item>
                 <Tabs.Item title="House Rule">
-                  <div className='flex gap-4'>
+                  <div className='flex gap-4 justify-center items-center'>
                     {/* map this add if else to success and failure */}
-                    <Badge color="failure" className='text-xl'>{houseRules}</Badge>
+                    <FontAwesomeIcon icon={faWarning} className='text-red-600 text-2xl' />
+                    <h1 className='text-xl text-red-600'>{houseRules}</h1>
                   </div>
                 </Tabs.Item>
                 <Tabs.Item title="Location">
