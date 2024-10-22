@@ -1,6 +1,8 @@
 const Property = require("../models/propertyModel");
 const ApiFeatures = require('../utils/apifeatures');
-const cloudinary = require('../config/cloudinaryCofig');
+const fs = require('fs'); // For file system operations
+
+// const cloudinary = require('../config/cloudinaryCofig');
 // Creating a new Property  with image uploads to Cloudinary
 // exports.propertyList = async (req, res) => {
 //     try {
@@ -27,10 +29,38 @@ const cloudinary = require('../config/cloudinaryCofig');
 //         res.status(400).json({ message: e.message });
 //     }
 // };
+const uploadToCloudinary = async (path) => {
+    return new Promise((resolve, reject) => {
+        cloudinary.uploader.upload(path, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result.secure_url); // Get the URL of the uploaded image
+            }
+        });
+    });
+};
 
 exports.propertyList = async (req, res) => {
     try {
-        const property = await Property.create(req.body);
+        // Handle images if they are part of the request
+        let imageUrls = [];
+
+        if (req.files && req.files.length > 0) {
+            // Upload each image to Cloudinary
+            imageUrls = await Promise.all(
+                req.files.map(file => uploadToCloudinary(file.path))
+            );
+
+            // Delete files from local storage after uploading to Cloudinary
+            req.files.forEach(file => fs.unlinkSync(file.path));
+        }
+        const propertyData = {
+            ...req.body, // Spread all other form data (name, description, etc.)
+            photos: imageUrls // Add uploaded image URLs to the property data
+        };
+
+        const property = await Property.create(propertyData);
 
         res.status(201.).json({ success: true, property });
     }

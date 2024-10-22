@@ -1,9 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useDropzone } from 'react-dropzone';
 
 const PropertyForm = () => {
+    const [images, setImages] = useState([]);
+    const [previewImages, setPreviewImages] = useState([]);
+    const { getRootProps, getInputProps } = useDropzone({
+        accept: 'image/jpeg, image/png',
+        onDrop: (acceptedFiles) => {
+            setImages(acceptedFiles);
+            setPreviewImages(
+                acceptedFiles.map((file) =>
+                    Object.assign(file, {
+                        preview: URL.createObjectURL(file),
+                    })
+                )
+            );
+        },
+    });
     const initialValues = {
         propertyType: '',
         propertyName: '',
@@ -61,10 +77,10 @@ const PropertyForm = () => {
             status: false,
             closureDates: []
         },
-        photos: [{
-            url: '',
-            caption: ''
-        }],
+        // photos: [{
+        //     url: '',
+        //     caption: ''
+        // }],
         verified: false,
         websiteURL: '',
         additionalPropertyLinks: []
@@ -129,12 +145,12 @@ const PropertyForm = () => {
             status: Yup.boolean().required('Open all year status is required'),
             closureDates: Yup.array()
         }),
-        photos: Yup.array().of(
-            Yup.object().shape({
-                url: Yup.string(),
-                caption: Yup.string()
-            })
-        ),
+        // photos: Yup.array().of(
+        //     Yup.object().shape({
+        //         url: Yup.string(),
+        //         caption: Yup.string()
+        //     })
+        // ),
         verified: Yup.boolean(),
         websiteURL: Yup.string(),
         additionalPropertyLinks: Yup.array()
@@ -154,19 +170,53 @@ const PropertyForm = () => {
     //         reader.readAsDataURL(file);
     //     }
     // };
+    // const handleSubmit = async (values, { setSubmitting }) => {
+    //     try {
+    //         const url = "https://holidayjoyvecation.onrender.com/api/v1"
+    //         await axios.post(url + '/list', values);
+    //         alert('Property submitted successfully!');
+    //         setSubmitting(false);
+    //     } catch (error) {
+    //         console.error('Error submitting property:', error);
+    //         alert('Error submitting property. Please try again.');
+    //         setSubmitting(false);
+    //     }
+    // };
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
-            const url = "https://holidayjoyvecation.onrender.com/api/v1"
-            await axios.post(url + '/list', values);
+            // Initialize FormData to handle both form values and images
+            const data = new FormData();
+    
+            // Dynamically append all form values to FormData
+            for (const key in values) {
+                if (values.hasOwnProperty(key)) {
+                    data.append(key, values[key]);
+                }
+            }
+    
+            // Append images to FormData
+            images.forEach((image) => {
+                data.append('images', image);
+            });
+    
+            // Make a single API call that includes both form values and images
+            const url = "https://holidayjoyvecation.onrender.com/api/v1/list";
+            const res = await axios.post(url, data, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+    
+            // Log response and notify the user
+            console.log(res.data);
             alert('Property submitted successfully!');
-            setSubmitting(false);
         } catch (error) {
             console.error('Error submitting property:', error);
             alert('Error submitting property. Please try again.');
+        } finally {
+            // Stop the submission state
             setSubmitting(false);
         }
-
     };
+    
     // useEffect(() => {
     //     if (photos.length === 0) {
     //         setPhotos([{ url: '', caption: '' }]);
@@ -470,7 +520,7 @@ const PropertyForm = () => {
                                     <ErrorMessage name="openAllYearRound.status" component="div" className="error text-red-400" />
                                 </div>
 
-                                {/* Photos */}
+                                {/* Photos 
                                 <div className='label1 w-full'>
                                     <label>Photos</label>
                                     <FieldArray name="photos">
@@ -496,6 +546,17 @@ const PropertyForm = () => {
                                         )}
                                     </FieldArray>
                                 </div>
+                                 */}
+                                <div {...getRootProps()} className="dropzone">
+                                    <input {...getInputProps()} />
+                                    <p>Drag 'n' drop up to 5 images, or click to select files</p>
+                                </div>
+                                <div className="preview">
+                                    {previewImages.map((file) => (
+                                        <img key={file.name} src={file.preview} alt="Preview" width="100" />
+                                    ))}
+                                </div>
+                                
                                 {/*nearbyattraction*/}
                                 <div className='label1 w-full'>
                                     <label>nearbyAttractions</label>
