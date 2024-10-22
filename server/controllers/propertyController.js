@@ -1,6 +1,7 @@
 const Property = require("../models/propertyModel");
 const ApiFeatures = require('../utils/apifeatures');
 const fs = require('fs'); // For file system operations
+const cloudinary = require('cloudinary').v2;
 
 // const cloudinary = require('../config/cloudinaryCofig');
 // Creating a new Property  with image uploads to Cloudinary
