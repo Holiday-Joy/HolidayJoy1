@@ -9,11 +9,9 @@ const propertySchema = new mongoose.Schema({
     nearbyAttractions: [{
         name: {
             type: String,
-            required: true
         },
         distance: {
             type: Number,
-            required: true,
             min: [0, 'Distance must be positive']
         }
     }],
